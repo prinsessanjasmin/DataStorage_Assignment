@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace Data.Repositories;
 
-public abstract class BaseRepository<TEntity>(DataContext context) : IBaseRepository<TEntity> where TEntity : class, IBaseRepository<TEntity>
+public abstract class BaseRepository<TEntity>(DataContext context) : IBaseRepository<TEntity> where TEntity : class
 {
     private readonly DataContext _context = context;
     private readonly DbSet<TEntity> _dbSet = context.Set<TEntity>();
