@@ -13,6 +13,10 @@ public class CompanyServiceEntity
     public int Id { get; set; }
 
     [Required]
+    [Column(TypeName = "nvarchar(50)")]
+    public string Title { get; set; } = null!; 
+
+    [Required]
     [Column(TypeName = "decimal(10,2)")]
     public decimal Price { get; set; }
 
