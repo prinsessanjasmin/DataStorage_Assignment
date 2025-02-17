@@ -89,7 +89,6 @@ public abstract class BaseRepository<TEntity>(DataContext context) : IBaseReposi
         {
             Debug.WriteLine($"Error finding entity :: {ex.Message}");
             return null!;
-
         }
     }
 

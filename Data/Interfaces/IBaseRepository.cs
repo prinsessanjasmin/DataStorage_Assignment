@@ -9,6 +9,7 @@ namespace Data.Interfaces
         Task<TEntity> GetAsync(Expression<Func<TEntity, bool>> expression);
         Task<TEntity> UpdateAsync(Expression<Func<TEntity, bool>> expression, TEntity updatedEntity);
         Task<bool> DeleteAsync(Expression<Func<TEntity, bool>> expression);
-        Task<bool> AlreadyExistsAsync(Expression<Func<TEntity, bool>> expression); 
+        Task<bool> AlreadyExistsAsync(Expression<Func<TEntity, bool>> expression);
+        Task<int> SaveAsync();
     }
 }

@@ -1,12 +1,14 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Business.Models
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Business.Models;
+
+public class EmployeeModel
 {
-    internal class EmployeeModel
-    {
-    }
+    public string FirstName { get; set; } = null!;
+    public string LastName { get; set; } = null!;
+    public string PhoneNumber { get; set; } = null!;
+    public string Email { get; set; } = null!;
 }

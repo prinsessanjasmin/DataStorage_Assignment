@@ -1,12 +1,12 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Business.Models
+using System.ComponentModel.DataAnnotations.Schema;
+using System.ComponentModel.DataAnnotations;
+
+namespace Business.Models;
+
+public class TimeframeModel
 {
-    internal class TimeframeModel
-    {
-    }
+    public DateTime StartDate { get; set; }
+    public DateTime EndDate { get; set; }
 }

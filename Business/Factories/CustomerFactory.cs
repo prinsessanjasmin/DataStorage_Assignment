@@ -1,12 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿
 
-namespace Business.Factories
+using Data.Entities;
+
+namespace Business.Factories;
+
+public static class CustomerFactory
 {
-    internal class CustomerFactory
+    public static CustomerEntity Create (string customerName)
     {
+        return new CustomerEntity
+        {
+            CustomerName = customerName,
+        };
     }
 }
