@@ -1,16 +1,17 @@
 ﻿
 
+using Business.Models;
 using Data.Entities;
 
 namespace Business.Factories;
 
 public static class CustomerFactory
 {
-    public static CustomerEntity Create (string customerName)
+    public static CustomerEntity Create (CustomerModel model)
     {
         return new CustomerEntity
         {
-            CustomerName = customerName,
+            CustomerName = model.CustomerName
         };
     }
 }

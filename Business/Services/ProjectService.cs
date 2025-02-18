@@ -63,11 +63,11 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
     {
         try
         {
-            ProjectEntity projectById = await _projectRepository.GetAsync(p => p.Id == id);
-            if (projectById == null)
+            ProjectEntity project = await _projectRepository.GetAsync(x => x.Id == id);
+            if (project == null)
                 return null!;
 
-            return projectById;
+            return project;
         }
         catch (Exception ex)
         {
@@ -80,11 +80,45 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
     {
         try
         {
-            ProjectEntity projectByName = await _projectRepository.GetAsync(p => p.Title == projectName);
-            if (projectByName == null)
+            ProjectEntity project = await _projectRepository.GetAsync(x => x.Title == projectName);
+            if (project == null)
                 return null!;
 
-            return projectByName;
+            return project;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error finding project :: {ex.Message}");
+            return null!;
+        }
+    }
+
+    public async Task<ProjectEntity> GetProjectByStartdate(DateTime startDate)
+    {
+        try
+        {
+            ProjectEntity project = await _projectRepository.GetAsync(x => x.Timeframe.StartDate == startDate);
+            if (project == null)
+                return null!;
+
+            return project;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error finding project :: {ex.Message}");
+            return null!;
+        }
+    }
+
+    public async Task<ProjectEntity> GetProjectByEndDate(DateTime endDate)
+    {
+        try
+        {
+            ProjectEntity project = await _projectRepository.GetAsync(x => x.Timeframe.EndDate == endDate);
+            if (project == null)
+                return null!;
+
+            return project;
         }
         catch (Exception ex)
         {
@@ -116,7 +150,7 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
         }
         catch (Exception ex)
         {
-            Debug.WriteLine($"Error updating project :: {ex.Message}");
+            Debug.WriteLine($"Error deleting project :: {ex.Message}");
             return false!;
         }
     }

@@ -11,9 +11,13 @@ public class TimeframeEntity
 
     [Required]
     [Column(TypeName = "date")]
+    [DataType(DataType.Date)]    // Claude AI
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] // Claude AI
     public DateTime StartDate { get; set; }
 
     [Required]
     [Column(TypeName = "date")]
+    [DataType(DataType.Date)]    // Claude AI
+    [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true)] // Claude AI
     public DateTime EndDate { get; set; }
 }
