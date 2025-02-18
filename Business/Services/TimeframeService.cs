@@ -16,16 +16,19 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
 
     public async Task<bool> CreateTimeframe(TimeframeModel timeframe)
     {
+        await _timeframeRepository.BeginTransactionAsync();
         try
         {
             TimeframeEntity timeframeEntity = TimeframeFactory.Create(timeframe);
 
             await _timeframeRepository.CreateAsync(timeframeEntity);
             await _timeframeRepository.SaveAsync();
+            await _timeframeRepository.CommitTransactionAsync();
             return true;
         }
         catch (Exception ex)
         {
+            await _timeframeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating timeframe :: {ex.Message}");
             return false;
         }
@@ -54,13 +57,18 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
 
     public async Task<TimeframeEntity> UpdateTimeframe(int id, TimeframeEntity timeframe)
     {
+        await _timeframeRepository.BeginTransactionAsync();
+
         try
         {
             TimeframeEntity existingTimeframe = await _timeframeRepository.UpdateAsync(x => x.Id == id, timeframe);
+            await _timeframeRepository.SaveAsync();
+            await _timeframeRepository.CommitTransactionAsync();
             return existingTimeframe;
         }
         catch (Exception ex)
         {
+            await _timeframeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error updating timeframe :: {ex.Message}");
             return null!;
         }
@@ -68,13 +76,18 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
 
     public async Task<bool> DeleteTimeframe(int id)
     {
+        await _timeframeRepository.BeginTransactionAsync();
+
         try
         {
             bool deleted = await _timeframeRepository.DeleteAsync(x => x.Id == id);
+            await _timeframeRepository.SaveAsync();
+            await _timeframeRepository.CommitTransactionAsync();
             return deleted;
         }
         catch (Exception ex)
         {
+            await _timeframeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error deleting timeframe :: {ex.Message}");
             return false!;
         }

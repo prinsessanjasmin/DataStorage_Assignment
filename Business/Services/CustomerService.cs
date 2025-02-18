@@ -12,9 +12,10 @@ namespace Business.Services;
 public class CustomerService(CustomerRepository customerRepository) : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;
-
     public async Task<bool> CreateCustomer(CustomerModel customer)
     {
+        await _customerRepository.BeginTransactionAsync();
+
         try
         {
             CustomerEntity customerEntity = CustomerFactory.Create(customer);
@@ -28,10 +29,12 @@ public class CustomerService(CustomerRepository customerRepository) : ICustomerS
 
             await _customerRepository.CreateAsync(customerEntity);
             await _customerRepository.SaveAsync();
+            await _customerRepository.CommitTransactionAsync();
             return true;
         }
         catch (Exception ex)
         {
+            await _customerRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating customer :: {ex.Message}");
             return false;
         }
@@ -96,13 +99,18 @@ public class CustomerService(CustomerRepository customerRepository) : ICustomerS
 
     public async Task<CustomerEntity> UpdateCustomer(int id, CustomerEntity updatedCustomer)
     {
+        await _customerRepository.BeginTransactionAsync();
+
         try
         {
             CustomerEntity customer = await _customerRepository.UpdateAsync(x => x.Id == id, updatedCustomer);
+            await _customerRepository.SaveAsync();
+            await _customerRepository.CommitTransactionAsync();
             return customer;
         }
         catch (Exception ex)
         {
+            await _customerRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error updating project :: {ex.Message}");
             return null!;
         }
@@ -110,13 +118,18 @@ public class CustomerService(CustomerRepository customerRepository) : ICustomerS
 
     public async Task<bool> DeleteCustomer(int id)
     {
+        await _customerRepository.BeginTransactionAsync();
+
         try
         {
             bool deleted = await _customerRepository.DeleteAsync(x => x.Id == id);
+            await _customerRepository.SaveAsync();
+            await _customerRepository.CommitTransactionAsync();
             return deleted;
         }
         catch (Exception ex)
         {
+            await _customerRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error deleting customer :: {ex.Message}");
             return false!;
         }

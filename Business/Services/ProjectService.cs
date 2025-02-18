@@ -14,6 +14,8 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 
     public async Task<bool> CreateProject(ProjectModel project)
     {
+        await _projectRepository.BeginTransactionAsync();
+
         try
         {
             
@@ -28,10 +30,12 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 
             await _projectRepository.CreateAsync(projectEntity);
             await _projectRepository.SaveAsync();
+            await _projectRepository.CommitTransactionAsync();
             return true;
         }
         catch (Exception ex)
         {
+            await _projectRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating project :: {ex.Message}");
             return false;
         }
@@ -129,13 +133,18 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 
     public async Task<ProjectEntity> UpdateProject(int id, ProjectEntity updatedProject)
     {
+        await _projectRepository.BeginTransactionAsync();
+
         try
         {
             ProjectEntity project = await _projectRepository.UpdateAsync(x => x.Id == id, updatedProject);
+            await _projectRepository.SaveAsync();
+            await _projectRepository.CommitTransactionAsync();
             return project;
         }
         catch (Exception ex)
         {
+            await _projectRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error updating project :: {ex.Message}");
             return null!;
         }
@@ -143,13 +152,18 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 
     public async Task<bool> DeleteProject(int id)
     {
+        await _projectRepository.BeginTransactionAsync();
+
         try
         {
             bool deleted = await _projectRepository.DeleteAsync(x => x.Id == id);
+            await _projectRepository.SaveAsync();
+            await _projectRepository.CommitTransactionAsync();
             return deleted;
         }
         catch (Exception ex)
         {
+            await _projectRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error deleting project :: {ex.Message}");
             return false!;
         }

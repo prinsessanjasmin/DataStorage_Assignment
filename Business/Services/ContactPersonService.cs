@@ -16,6 +16,8 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
 
     public async Task<bool> CreateContact(ContactPersonModel contact)
     {
+        await _contactPersonRepository.BeginTransactionAsync();
+
         try
         {
             ContactPersonEntity contactPersonEntity = ContactPersonFactory.Create(contact);
@@ -29,10 +31,12 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
 
             await _contactPersonRepository.CreateAsync(contactPersonEntity);
             await _contactPersonRepository.SaveAsync();
+            await _contactPersonRepository.CommitTransactionAsync();
             return true;
         }
         catch (Exception ex)
         {
+            await _contactPersonRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating contact person :: {ex.Message}");
             return false;
         }
@@ -97,13 +101,18 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
 
     public async Task<ContactPersonEntity> UpdateContactPerson(int id, ContactPersonEntity updatedContact)
     {
+        await _contactPersonRepository.BeginTransactionAsync();
+
         try
         {
             ContactPersonEntity contact = await _contactPersonRepository.UpdateAsync(x => x.Id == id, updatedContact);
+            await _contactPersonRepository.SaveAsync();
+            await _contactPersonRepository.CommitTransactionAsync();
             return contact;
         }
         catch (Exception ex)
         {
+            await _contactPersonRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error updating contact person :: {ex.Message}");
             return null!;
         }
@@ -111,13 +120,18 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
 
     public async Task<bool> DeleteContact(int id)
     {
+        await _contactPersonRepository.BeginTransactionAsync();
+
         try
         {
             bool deleted = await _contactPersonRepository.DeleteAsync(x => x.Id == id);
+            await _contactPersonRepository.SaveAsync();
+            await _contactPersonRepository.CommitTransactionAsync();
             return deleted;
         }
         catch (Exception ex)
         {
+            await _contactPersonRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error deleting contact person :: {ex.Message}");
             return false!;
         }

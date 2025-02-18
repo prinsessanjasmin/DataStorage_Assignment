@@ -15,6 +15,8 @@ public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeS
 
     public async Task<bool> CreateEmployee(EmployeeModel employee)
     {
+        await _employeeRepository.BeginTransactionAsync();
+
         try
         {
             EmployeeEntity employeeEntity = EmployeeFactory.Create(employee);
@@ -28,10 +30,12 @@ public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeS
 
             await _employeeRepository.CreateAsync(employeeEntity);
             await _employeeRepository.SaveAsync();
+            await _employeeRepository.CommitTransactionAsync();
             return true;
         }
         catch (Exception ex)
         {
+            await _employeeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating employee :: {ex.Message}");
             return false;
         }
@@ -94,29 +98,38 @@ public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeS
 
     public async Task<EmployeeEntity> UpdateEmployee(int id, EmployeeEntity updatedEmployee)
     {
+        await _employeeRepository.BeginTransactionAsync();
+
         try
         {
             EmployeeEntity employee = await _employeeRepository.UpdateAsync(x => x.Id == id, updatedEmployee);
+            await _employeeRepository.SaveAsync();
+            await _employeeRepository.CommitTransactionAsync();
             return employee;
         }
         catch (Exception ex)
         {
+            await _employeeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error updating employee :: {ex.Message}");
             return null!;
         }
     }
     public async Task<bool> DeleteEmployee(int id)
     {
+        await _employeeRepository.BeginTransactionAsync(); 
+
         try
         {
             bool deleted = await _employeeRepository.DeleteAsync(x => x.Id == id);
+            await _employeeRepository.SaveAsync();
+            await _employeeRepository.CommitTransactionAsync();
             return deleted;
         }
         catch (Exception ex)
         {
+            await _employeeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error deleting employee :: {ex.Message}");
             return false!;
         }
     }
-
 }
