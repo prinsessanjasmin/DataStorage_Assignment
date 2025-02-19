@@ -204,13 +204,13 @@ namespace Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HoursWorked")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProjectManagerId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<int>("TimeframeId")

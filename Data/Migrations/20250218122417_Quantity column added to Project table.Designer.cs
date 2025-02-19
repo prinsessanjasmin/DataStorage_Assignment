@@ -12,8 +12,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250216143052_Service name added to Service table")]
-    partial class ServicenameaddedtoServicetable
+    [Migration("20250218122417_Quantity column added to Project table")]
+    partial class QuantitycolumnaddedtoProjecttable
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,13 +207,13 @@ namespace Data.Migrations
                     b.Property<int>("CustomerId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("HoursWorked")
-                        .HasColumnType("int");
-
                     b.Property<int>("ProjectManagerId")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectStatusId")
+                        .HasColumnType("int");
+
+                    b.Property<int?>("Quantity")
                         .HasColumnType("int");
 
                     b.Property<int>("TimeframeId")

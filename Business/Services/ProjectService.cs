@@ -20,13 +20,17 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
         {
             
             ProjectEntity projectEntity = ProjectFactory.Create(project);
+            
             var name = projectEntity.Title;
             bool exists = await _projectRepository.AlreadyExistsAsync(x => x.Title == name);
             if (exists)
             {
+                await _projectRepository.RollbackTransactionAsync();
                 Debug.WriteLine("A project with the same name already exists. Use another title if you want to create a new project.");
                 return false; 
             }
+
+            projectEntity.TotalPrice = HelperService.CalculateTotalPrice(projectEntity.Quantity, projectEntity.CompanyService.Price);
 
             await _projectRepository.CreateAsync(projectEntity);
             await _projectRepository.SaveAsync();
@@ -137,7 +141,9 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 
         try
         {
+            updatedProject.TotalPrice = HelperService.CalculateTotalPrice(updatedProject.Quantity, updatedProject.CompanyService.Price);
             ProjectEntity project = await _projectRepository.UpdateAsync(x => x.Id == id, updatedProject);
+            
             await _projectRepository.SaveAsync();
             await _projectRepository.CommitTransactionAsync();
             return project;
@@ -168,4 +174,5 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
             return false!;
         }
     }
+
 }

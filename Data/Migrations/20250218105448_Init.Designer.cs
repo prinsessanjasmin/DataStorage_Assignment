@@ -12,7 +12,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Data.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20250214143244_Init")]
+    [Migration("20250218105448_Init")]
     partial class Init
     {
         /// <inheritdoc />
@@ -55,6 +55,10 @@ namespace Data.Migrations
 
                     b.Property<decimal>("Price")
                         .HasColumnType("decimal(10,2)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<int>("UnitId")
                         .HasColumnType("int");
@@ -201,9 +205,6 @@ namespace Data.Migrations
                         .HasColumnType("int");
 
                     b.Property<int>("CustomerId")
-                        .HasColumnType("int");
-
-                    b.Property<int?>("HoursWorked")
                         .HasColumnType("int");
 
                     b.Property<int>("ProjectManagerId")

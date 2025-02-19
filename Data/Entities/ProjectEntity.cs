@@ -18,7 +18,7 @@ public class ProjectEntity
     [Column(TypeName = "nvarchar(max)")]
     public string? About { get; set; }
 
-    public int? HoursWorked { get; set; }
+    public int Quantity { get; set; }
 
     [Column(TypeName = "decimal(10,2)")]
     public decimal? TotalPrice { get; set; }

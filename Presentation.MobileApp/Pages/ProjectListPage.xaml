@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Presentation.MobileApp.Pages.ProjectListPage"
+             
+             xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             x:DataType="{x:Type viewmodels:ProjectListViewModel}"
+             
+             Title="Project List">
+    <VerticalStackLayout>
+        <Label 
+            Text="Project List"
+            VerticalOptions="Center" 
+            HorizontalOptions="Center" />
+
+        <Button x:Name="Btn_AddProject" Text="Add New Project" Command="{Binding NavigateToProjectAddCommand}"/>
+    </VerticalStackLayout>
+</ContentPage>

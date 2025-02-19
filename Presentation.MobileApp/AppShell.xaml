@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<Shell
+    x:Class="Presentation.MobileApp.AppShell"
+    xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:Presentation.MobileApp"
+    xmlns:pages="clr-namespace:Presentation.MobileApp.Pages"
+    Shell.FlyoutBehavior="Flyout"
+    Shell.NavBarIsVisible="true"
+    Title="Presentation.MobileApp">
+
+    <!--Den som ligger först här är den som appen startar med--> 
+    <ShellContent
+        Title="Mattin-Lassei Group AB"
+        ContentTemplate="{DataTemplate local:MainPage}"
+        Route="MainPage" />
+
+    <ShellContent
+        Title="All Projects"
+        ContentTemplate="{DataTemplate pages:ProjectListPage}"
+        Route="ProjectListPage" />
+
+    <ShellContent
+        Title="Add New Project"
+        ContentTemplate="{DataTemplate pages:ProjectAddPage}"
+        Route="ProjectAddPage" />
+
+    <ShellContent
+        Title="All Customers"
+        ContentTemplate="{DataTemplate pages:CustomerListPage}"
+        Route="CustomerListPage" />
+
+    <ShellContent
+        Title="Add New Customer"
+        ContentTemplate="{DataTemplate pages:CustomerAddPage}"
+        Route="CustomerAddPage" />
+
+    <ShellContent
+        Title="All Employees"
+        ContentTemplate="{DataTemplate pages:EmployeeListPage}"
+        Route="EmployeeListPage" />
+
+    <ShellContent
+        Title="Add New Employee"
+        ContentTemplate="{DataTemplate pages:EmployeeAddPage}"
+        Route="EmployeeAddPage" />
+
+    <ShellContent
+        Title="AllServices"
+        ContentTemplate="{DataTemplate pages:ServiceListPage}"
+        Route="ServiceListPage" />
+
+    <ShellContent
+        Title="Add New Service"
+        ContentTemplate="{DataTemplate pages:ServiceAddPage}"
+        Route="ServiceAddPage" />   
+
+</Shell>

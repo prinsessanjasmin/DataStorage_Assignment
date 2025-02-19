@@ -5,25 +5,24 @@
 namespace Data.Migrations
 {
     /// <inheritdoc />
-    public partial class ServicenameaddedtoServicetable : Migration
+    public partial class QuantitycolumnaddedtoProjecttable : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
-            migrationBuilder.AddColumn<string>(
-                name: "Title",
-                table: "Services",
-                type: "nvarchar(50)",
-                nullable: false,
-                defaultValue: "");
+            migrationBuilder.AddColumn<int>(
+                name: "Quantity",
+                table: "Projects",
+                type: "int",
+                nullable: true);
         }
 
         /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropColumn(
-                name: "Title",
-                table: "Services");
+                name: "Quantity",
+                table: "Projects");
         }
     }
 }

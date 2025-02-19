@@ -159,6 +159,7 @@ namespace Data.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    Title = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     Price = table.Column<decimal>(type: "decimal(10,2)", nullable: false),
                     UnitId = table.Column<int>(type: "int", nullable: false),
                     CurrencyId = table.Column<int>(type: "int", nullable: false)
@@ -185,10 +186,9 @@ namespace Data.Migrations
                 columns: table => new
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                        .Annotation("SqlServer:Identity", "100, 1"),
                     Title = table.Column<string>(type: "nvarchar(50)", nullable: false),
                     About = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    HoursWorked = table.Column<int>(type: "int", nullable: true),
                     TotalPrice = table.Column<decimal>(type: "decimal(10,2)", nullable: true),
                     TimeframeId = table.Column<int>(type: "int", nullable: false),
                     ProjectStatusId = table.Column<int>(type: "int", nullable: false),
