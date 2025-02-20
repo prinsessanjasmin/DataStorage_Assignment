@@ -9,4 +9,10 @@ public partial class CustomerListPage : ContentPage
 		InitializeComponent();
 		BindingContext = viewModel;
 	}
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await ((CustomerListViewModel)BindingContext).LoadCustomers();
+    }
 }

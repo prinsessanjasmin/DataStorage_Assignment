@@ -1,15 +1,58 @@
-﻿using CommunityToolkit.Mvvm.ComponentModel;
+﻿using Business.Interfaces;
+using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
+using Data.Entities;
+using Presentation.MobileApp.ApiServices;
+using System.Collections.ObjectModel;
 
 namespace Presentation.MobileApp.ViewModels
 {
     public partial class EmployeeListViewModel : ObservableObject
     {
+        private readonly IEmployeeService _employeeApiService;
+
+        [ObservableProperty]
+        private ObservableCollection<EmployeeEntity> _employees;
+
+        [ObservableProperty]
         private string _errorMessage;
-        public string ErrorMessage
+
+        public EmployeeListViewModel(IEmployeeService employeeApiService)
         {
-            get => _errorMessage;
-            set => SetProperty(ref _errorMessage, value);
+            _employeeApiService = employeeApiService;
+            _employees = new ObservableCollection<EmployeeEntity>();
+        }
+
+        [RelayCommand]
+        public async Task LoadEmployees()
+        {
+            try
+            {
+                var employeeList = await _employeeApiService.GetAllEmployees();
+                if (employeeList != null)
+                {
+                    Employees.Clear();
+                    foreach (var employee in employeeList)
+                    {
+                        Employees.Add(employee);
+                    }
+                    ErrorMessage = _employeeApiService.ErrorMessage;
+                }
+                else
+                {
+                    ErrorMessage = _employeeApiService.ErrorMessage;
+                }
+            }
+            catch
+            {
+                ErrorMessage = _employeeApiService.ErrorMessage;
+            }
+        }
+
+        [RelayCommand]
+        public async Task NavigateToEmployeeAdd()
+        {
+            await Shell.Current.GoToAsync("EmployeeAddPage");
         }
 
         [RelayCommand]

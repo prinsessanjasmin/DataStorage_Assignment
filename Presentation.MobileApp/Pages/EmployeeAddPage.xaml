@@ -7,13 +7,16 @@
              
              x:Class="Presentation.MobileApp.Pages.EmployeeAddPage"
              Title="Add New Employee">
-    <VerticalStackLayout>
-        <Label 
-            Text="Add New Employee"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-
-        <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"/>
-        
-    </VerticalStackLayout>
+    <Grid RowDefinitions="auto, *, auto">
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="Add New Employee" VerticalOptions="Center" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="1">
+        </VerticalStackLayout>
+        <VerticalStackLayout Grid.Row="2" Margin="20">
+            <Button x:Name="Btn_GoToEmployeeList" Text="All Employees" Command="{Binding NavigateToEmployeeListCommand}"  Margin="10"/>
+            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="10"/>
+        </VerticalStackLayout>
+    </Grid>
+    
 </ContentPage>

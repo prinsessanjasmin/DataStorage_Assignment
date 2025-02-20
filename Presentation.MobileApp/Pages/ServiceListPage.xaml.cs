@@ -9,4 +9,10 @@ public partial class ServiceListPage : ContentPage
 		InitializeComponent();
         BindingContext = viewModel;
     }
+
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await ((ServiceListViewModel)BindingContext).LoadCompanyServices();
+    }
 }

@@ -25,8 +25,6 @@ public partial class ProjectListViewModel : ObservableObject
 
     }
 
-
-
     [RelayCommand]
     public async Task LoadProjects()
     {
@@ -67,5 +65,4 @@ public partial class ProjectListViewModel : ObservableObject
     {
         await Shell.Current.GoToAsync("//MainPage");
     }
-
 }

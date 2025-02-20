@@ -16,10 +16,16 @@
                 <CollectionView.ItemTemplate>
                     <DataTemplate>
                         <Grid>
+                            
                             <HorizontalStackLayout>
+                                
+                                <Label Text="{Binding ProjectId}" FontSize="14" Padding="5"/>
                                 <Label Text="{Binding Title}" FontSize="16" Padding="5"/>
                                 <Label Text="{Binding About}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding ProjectStatusId}" FontSize="14"  Padding="5"/>
+                                <Label Text="{Binding Timeframe.StartDate}" FontSize="14"  Padding="5"/>
+                                <Label Text="{Binding Timeframe.EndDate}" FontSize="14"  Padding="5"/>
+                                <Label Text="{Binding ProjectStatus.StatusName}" FontSize="14"  Padding="5"/>
+                                <Label Text="{Binding Customer.CustomerName}" FontSize="14"  Padding="5"/>
                             </HorizontalStackLayout>
                         </Grid>
                     </DataTemplate>

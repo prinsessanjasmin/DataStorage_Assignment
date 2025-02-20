@@ -7,7 +7,7 @@ namespace DataStorage.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class EmplyeeController(IEmployeeService employeeService) : ControllerBase
+public class EmployeeController(IEmployeeService employeeService) : ControllerBase
 {
     private readonly IEmployeeService _employeeService = employeeService;
 

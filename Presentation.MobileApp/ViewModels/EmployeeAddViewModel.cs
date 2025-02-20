@@ -12,6 +12,13 @@ public partial class EmployeeAddViewModel : ObservableObject
         set => SetProperty(ref _errorMessage, value);
     }
 
+
+    [RelayCommand]
+    public async Task NavigateToEmployeeList()
+    {
+        await Shell.Current.GoToAsync("EmployeeListPage");
+    }
+
     [RelayCommand]
     public async Task NavigateToHome()
     {
