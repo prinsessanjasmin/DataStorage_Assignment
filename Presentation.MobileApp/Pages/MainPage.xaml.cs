@@ -1,7 +1,7 @@
 ﻿using Presentation.MobileApp.ViewModels;
 using System.Collections.ObjectModel;
 
-namespace Presentation.MobileApp;
+namespace Presentation.MobileApp.Pages;
 
 public partial class MainPage : ContentPage
 {

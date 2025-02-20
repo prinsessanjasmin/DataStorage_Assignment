@@ -3,14 +3,14 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
              x:DataType="{x:Type viewmodels:MainPageViewModel}"
-             x:Class="Presentation.MobileApp.MainPage">
+             x:Class="Presentation.MobileApp.Pages.MainPage">
 
     <Grid RowDefinitions="auto" Margin="20">
         <StackLayout Margin="10" Grid.Row="0">
             <Button x:Name="Btn_Projects" Text="Projects" Margin="5" Padding="10" Command="{Binding NavigateToProjectListCommand}"/>
-            <!--<Button x:Name="Btn_Customers" Text="Customers" Margin="5" Padding="10" Clicked="Btn_Customers_Clicked"/>
-            <Button x:Name="Btn_Services" Text="Services" Margin="5" Padding="10" Clicked="Btn_Services_Clicked"/>
-            <Button x:Name="Btn_Employees" Text="Employees" Margin="5" Padding="10" Clicked="Btn_Employees_Clicked"/>-->
+            <Button x:Name="Btn_Customers" Text="Customers" Margin="5" Padding="10" Command="{Binding NavigateToCustomersListCommand}"/>
+            <Button x:Name="Btn_Services" Text="Services" Margin="5" Padding="10" Command="{Binding NavigateToServiceListCommand}"/>
+            <Button x:Name="Btn_Employees" Text="Employees" Margin="5" Padding="10" Command="{Binding NavigateToEmployeeListCommand}"/>
         </StackLayout>
     </Grid>
 </ContentPage>

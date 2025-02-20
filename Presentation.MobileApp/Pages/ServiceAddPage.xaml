@@ -12,5 +12,8 @@
             Text="Add New Service"
             VerticalOptions="Center" 
             HorizontalOptions="Center" />
+
+        <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"/>
+        
     </VerticalStackLayout>
 </ContentPage>

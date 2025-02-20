@@ -13,7 +13,7 @@ public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeS
 {
     private readonly IEmployeeRepository _employeeRepository = employeeRepository;
 
-    public async Task<bool> CreateEmployee(EmployeeModel employee)
+    public async Task<EmployeeEntity> CreateEmployee(EmployeeModel employee)
     {
         await _employeeRepository.BeginTransactionAsync();
 
@@ -25,19 +25,19 @@ public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeS
             if (exists)
             {
                 Debug.WriteLine("An employee with the same email already exists.");
-                return false;
+                return null!;
             }
 
             await _employeeRepository.CreateAsync(employeeEntity);
             await _employeeRepository.SaveAsync();
             await _employeeRepository.CommitTransactionAsync();
-            return true;
+            return employeeEntity;
         }
         catch (Exception ex)
         {
             await _employeeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating employee :: {ex.Message}");
-            return false;
+            return null!;
         }
     }
 

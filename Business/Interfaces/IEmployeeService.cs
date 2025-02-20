@@ -7,7 +7,7 @@ namespace Business.Interfaces;
 
 public interface IEmployeeService
 {
-    Task<bool> CreateEmployee(EmployeeModel employee);
+    Task<EmployeeEntity> CreateEmployee(EmployeeModel employee);
     Task<IEnumerable<EmployeeEntity>> GetAllEmployees();
     Task<EmployeeEntity> GetEmployeeById(int id);
     Task<EmployeeEntity> GetEmployeeByEmail(string email);

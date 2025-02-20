@@ -12,7 +12,7 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
 
-    public async Task<bool> CreateProject(ProjectModel project)
+    public async Task<ProjectEntity> CreateProject(ProjectModel project)
     {
         await _projectRepository.BeginTransactionAsync();
 
@@ -27,7 +27,7 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
             {
                 await _projectRepository.RollbackTransactionAsync();
                 Debug.WriteLine("A project with the same name already exists. Use another title if you want to create a new project.");
-                return false; 
+                return null!; 
             }
 
             projectEntity.TotalPrice = HelperService.CalculateTotalPrice(projectEntity.Quantity, projectEntity.CompanyService.Price);
@@ -35,13 +35,13 @@ public class ProjectService(ProjectRepository projectRepository) : IProjectServi
             await _projectRepository.CreateAsync(projectEntity);
             await _projectRepository.SaveAsync();
             await _projectRepository.CommitTransactionAsync();
-            return true;
+            return projectEntity;
         }
         catch (Exception ex)
         {
             await _projectRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating project :: {ex.Message}");
-            return false;
+            return null!;
         }
     }
 

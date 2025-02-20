@@ -9,6 +9,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Business", "Business\Busine
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Presentation.MobileApp", "Presentation.MobileApp\Presentation.MobileApp.csproj", "{191C4CBF-4014-4D70-AAB8-7095F36D3611}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DataStorage.API", "DataStorage.API\DataStorage.API.csproj", "{9DB14DE0-D1D8-4490-94CA-1041D17D14DF}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -28,6 +30,10 @@ Global
 		{191C4CBF-4014-4D70-AAB8-7095F36D3611}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
 		{191C4CBF-4014-4D70-AAB8-7095F36D3611}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{191C4CBF-4014-4D70-AAB8-7095F36D3611}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9DB14DE0-D1D8-4490-94CA-1041D17D14DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9DB14DE0-D1D8-4490-94CA-1041D17D14DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9DB14DE0-D1D8-4490-94CA-1041D17D14DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9DB14DE0-D1D8-4490-94CA-1041D17D14DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

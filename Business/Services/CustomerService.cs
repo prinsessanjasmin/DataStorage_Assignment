@@ -12,7 +12,7 @@ namespace Business.Services;
 public class CustomerService(CustomerRepository customerRepository) : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;
-    public async Task<bool> CreateCustomer(CustomerModel customer)
+    public async Task<CustomerEntity> CreateCustomer(CustomerModel customer)
     {
         await _customerRepository.BeginTransactionAsync();
 
@@ -24,19 +24,19 @@ public class CustomerService(CustomerRepository customerRepository) : ICustomerS
             if (exists)
             {
                 Debug.WriteLine("A customer with the same name already exists.");
-                return false;
+                return null!;
             }
 
-            await _customerRepository.CreateAsync(customerEntity);
+            CustomerEntity createdCustomer = await _customerRepository.CreateAsync(customerEntity);
             await _customerRepository.SaveAsync();
             await _customerRepository.CommitTransactionAsync();
-            return true;
+            return createdCustomer;
         }
         catch (Exception ex)
         {
             await _customerRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating customer :: {ex.Message}");
-            return false;
+            return null!;
         }
     }
 

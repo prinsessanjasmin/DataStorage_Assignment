@@ -14,7 +14,7 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
 {
     private readonly ITimeframeRepository _timeframeRepository = timeframeRepository;
 
-    public async Task<bool> CreateTimeframe(TimeframeModel timeframe)
+    public async Task<TimeframeEntity> CreateTimeframe(TimeframeModel timeframe)
     {
         await _timeframeRepository.BeginTransactionAsync();
         try
@@ -24,13 +24,13 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
             await _timeframeRepository.CreateAsync(timeframeEntity);
             await _timeframeRepository.SaveAsync();
             await _timeframeRepository.CommitTransactionAsync();
-            return true;
+            return timeframeEntity;
         }
         catch (Exception ex)
         {
             await _timeframeRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating timeframe :: {ex.Message}");
-            return false;
+            return null!;
         }
     }
 
@@ -55,6 +55,22 @@ public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFr
         }
     }
 
+    public async Task<TimeframeEntity> GetTimeframeById(int id)
+    {
+        try
+        {
+            TimeframeEntity timeframe = await _timeframeRepository.GetAsync(x => x.Id == id);
+            if (timeframe == null)
+                return null!;
+
+            return timeframe;
+        }
+        catch (Exception ex)
+        {
+            Debug.WriteLine($"Error finding timeframe :: {ex.Message}");
+            return null!;
+        }
+    }
     public async Task<TimeframeEntity> UpdateTimeframe(int id, TimeframeEntity timeframe)
     {
         await _timeframeRepository.BeginTransactionAsync();

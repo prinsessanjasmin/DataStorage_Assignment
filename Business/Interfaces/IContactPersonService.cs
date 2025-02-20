@@ -7,7 +7,7 @@ namespace Business.Interfaces;
 
 public interface IContactPersonService
 {
-    Task<bool> CreateContact(ContactPersonModel contact);
+    Task<ContactPersonEntity> CreateContact(ContactPersonModel contact);
     Task<IEnumerable<ContactPersonEntity>> GetAllContacts();
     Task<ContactPersonEntity> GetContactById(int id);
     Task<ContactPersonEntity> GetContactByEmail(string email);

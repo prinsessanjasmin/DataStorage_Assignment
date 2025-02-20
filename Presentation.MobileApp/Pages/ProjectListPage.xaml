@@ -14,5 +14,6 @@
             HorizontalOptions="Center" />
 
         <Button x:Name="Btn_AddProject" Text="Add New Project" Command="{Binding NavigateToProjectAddCommand}"/>
+        <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"/>
     </VerticalStackLayout>
 </ContentPage>

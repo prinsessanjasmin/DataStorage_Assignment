@@ -14,7 +14,7 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
 {
     private readonly IContactPersonRepository _contactPersonRepository = contactPersonRepository;
 
-    public async Task<bool> CreateContact(ContactPersonModel contact)
+    public async Task<ContactPersonEntity> CreateContact(ContactPersonModel contact)
     {
         await _contactPersonRepository.BeginTransactionAsync();
 
@@ -26,19 +26,19 @@ public class ContactPersonService(ContactPersonRepository contactPersonRepositor
             if (exists)
             {
                 Debug.WriteLine("A contact person with the same email already exists.");
-                return false;
+                return null!;
             }
 
             await _contactPersonRepository.CreateAsync(contactPersonEntity);
             await _contactPersonRepository.SaveAsync();
             await _contactPersonRepository.CommitTransactionAsync();
-            return true;
+            return contactPersonEntity;
         }
         catch (Exception ex)
         {
             await _contactPersonRepository.RollbackTransactionAsync();
             Debug.WriteLine($"Error creating contact person :: {ex.Message}");
-            return false;
+            return null!;
         }
     }
 
