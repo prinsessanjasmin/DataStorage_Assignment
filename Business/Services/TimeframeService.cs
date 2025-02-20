@@ -10,9 +10,11 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class TimeframeService(TimeframeRepository timeframeRepository) : ITimeFrameService
+public class TimeframeService(ITimeframeRepository timeframeRepository) : ITimeframeService
 {
     private readonly ITimeframeRepository _timeframeRepository = timeframeRepository;
+
+    public string ErrorMessage => throw new NotImplementedException();
 
     public async Task<TimeframeEntity> CreateTimeframe(TimeframeModel timeframe)
     {

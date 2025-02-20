@@ -11,5 +11,9 @@ public partial class ProjectListPage : ContentPage
         BindingContext = viewModel;
     }
 
-
+    protected override async void OnAppearing()
+    {
+        base.OnAppearing();
+        await ((ProjectListViewModel)BindingContext).LoadProjects();
+    }
 }

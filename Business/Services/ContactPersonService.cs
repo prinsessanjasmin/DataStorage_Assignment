@@ -10,7 +10,7 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class ContactPersonService(ContactPersonRepository contactPersonRepository) : IContactPersonService
+public class ContactPersonService(IContactPersonRepository contactPersonRepository) : IContactPersonService
 {
     private readonly IContactPersonRepository _contactPersonRepository = contactPersonRepository;
 

@@ -10,4 +10,7 @@ public interface ICompanyServiceService
     Task<CompanyServiceEntity> GetCompanyServiceById(int id);
     Task<CompanyServiceEntity> UpdateCompanyService(int id, CompanyServiceEntity updatedCompanyService);
     Task<bool> DeleteCompanyService(int id);
+    string ErrorMessage { get; }
+
+
 }

@@ -8,16 +8,16 @@ namespace DataStorage.API.Controllers;
 
 [ApiController]
 [Route("api/[controller]")]
-public class TimeframeController(ITimeFrameService timeFrameService) : ControllerBase
+public class TimeframeController(ITimeframeService timeFrameService) : ControllerBase
 {
-    private readonly ITimeFrameService _timeFrameService = timeFrameService;
+    private readonly ITimeframeService _timeframeService = timeFrameService;
 
     [HttpGet]
     public async Task<ActionResult<IEnumerable<TimeframeEntity>>> GetTimeframes()
     {
         try
         {
-            var timeframes = await _timeFrameService.GetAllTimeframes();
+            var timeframes = await _timeframeService.GetAllTimeframes();
             if (timeframes == null)
             {
                 return NotFound("Couldn't find any timeframes in the database");
@@ -35,7 +35,7 @@ public class TimeframeController(ITimeFrameService timeFrameService) : Controlle
     {
         try
         {
-            var timeframe = await _timeFrameService.GetTimeframeById(id);
+            var timeframe = await _timeframeService.GetTimeframeById(id);
             if (timeframe == null)
             {
                 return NotFound("The timeframe you're looking for wasn't found in the database.");
@@ -53,7 +53,7 @@ public class TimeframeController(ITimeFrameService timeFrameService) : Controlle
     {
         try
         {
-            var created = await _timeFrameService.CreateTimeframe(timeframe);
+            var created = await _timeframeService.CreateTimeframe(timeframe);
             if (created == null)
             {
                 return BadRequest("Failed to create timeframe");
@@ -72,7 +72,7 @@ public class TimeframeController(ITimeFrameService timeFrameService) : Controlle
     {
         try
         {
-            var timeframe = await _timeFrameService.UpdateTimeframe(id, updatedTimeframe);
+            var timeframe = await _timeframeService.UpdateTimeframe(id, updatedTimeframe);
             if (timeframe == null)
             {
                 return NotFound("The timeframe you're trying to update wasn't found in the database.");
@@ -91,7 +91,7 @@ public class TimeframeController(ITimeFrameService timeFrameService) : Controlle
     {
         try
         {
-            var timeframe = await _timeFrameService.DeleteTimeframe(id);
+            var timeframe = await _timeframeService.DeleteTimeframe(id);
             if (!timeframe)
             {
                 return NotFound("The timeframe you're trying to delete wasn't found in the database.");

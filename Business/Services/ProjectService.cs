@@ -8,9 +8,11 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class ProjectService(ProjectRepository projectRepository) : IProjectService
+public class ProjectService(IProjectRepository projectRepository) : IProjectService
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
+
+    public string ErrorMessage => throw new NotImplementedException();
 
     public async Task<ProjectEntity> CreateProject(ProjectModel project)
     {

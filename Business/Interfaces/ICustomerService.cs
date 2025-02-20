@@ -11,4 +11,6 @@ public interface ICustomerService
     Task<CustomerEntity> GetCustomerByName(string name);
     Task<CustomerEntity> UpdateCustomer(int id, CustomerEntity updatedCustomer);
     Task<bool> DeleteCustomer(int id);
+    string ErrorMessage { get; }
+
 }

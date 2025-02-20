@@ -8,6 +8,7 @@ using Data.Repositories;
 
 var builder = WebApplication.CreateBuilder(args);
 
+
 // Add services to the container.
 
 builder.Services.AddDbContext<Data.Contexts.DataContext>(options =>
@@ -25,19 +26,22 @@ builder.Services.AddScoped<IProjectStatusRepository, ProjectStatusRepository>();
 builder.Services.AddScoped<ITimeframeRepository, TimeframeRepository>();
 builder.Services.AddScoped<IUnitRepository, UnitRepository>();
 
-builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+//builder.Services.AddScoped(typeof(IBaseRepository<>), typeof(BaseRepository<>));
+
 builder.Services.AddScoped<IContactPersonService, ContactPersonService>();
 builder.Services.AddScoped<ICustomerService, CustomerService>();
 builder.Services.AddScoped<IEmployeeService, EmployeeService>();
 builder.Services.AddScoped<IProjectService, ProjectService>();
-builder.Services.AddScoped<ITimeFrameService, TimeframeService>();
+builder.Services.AddScoped<ITimeframeService, TimeframeService>();
 builder.Services.AddScoped<ICompanyServiceService, CompanyServiceService>();
 
 builder.Services.AddControllers();
-// Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
+builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddOpenApi();
 
+
 var app = builder.Build();
+
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())

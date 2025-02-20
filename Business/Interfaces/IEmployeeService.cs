@@ -13,4 +13,5 @@ public interface IEmployeeService
     Task<EmployeeEntity> GetEmployeeByEmail(string email);
     Task<EmployeeEntity> UpdateEmployee(int id, EmployeeEntity updatedEmployee);
     Task<bool> DeleteEmployee(int id);
+    string ErrorMessage { get; }
 }

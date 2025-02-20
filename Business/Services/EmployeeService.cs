@@ -9,9 +9,11 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class EmployeeService(EmployeeRepository employeeRepository) : IEmployeeService
+public class EmployeeService(IEmployeeRepository employeeRepository) : IEmployeeService
 {
     private readonly IEmployeeRepository _employeeRepository = employeeRepository;
+
+    public string ErrorMessage => throw new NotImplementedException();
 
     public async Task<EmployeeEntity> CreateEmployee(EmployeeModel employee)
     {

@@ -8,9 +8,11 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class CompanyServiceService(CompanyServiceRepository companyServiceRepository) : ICompanyServiceService
+public class CompanyServiceService(ICompanyServiceRepository companyServiceRepository) : ICompanyServiceService
 {
     private readonly ICompanyServiceRepository _companyServiceRepository = companyServiceRepository;
+
+    public string ErrorMessage => throw new NotImplementedException();
 
     public async Task<CompanyServiceEntity> CreateCompanyService(CompanyServiceModel companyServiceModel)
     {

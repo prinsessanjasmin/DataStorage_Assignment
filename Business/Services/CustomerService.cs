@@ -9,9 +9,12 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class CustomerService(CustomerRepository customerRepository) : ICustomerService
+public class CustomerService(ICustomerRepository customerRepository) : ICustomerService
 {
     private readonly ICustomerRepository _customerRepository = customerRepository;
+
+    public string ErrorMessage => throw new NotImplementedException();
+
     public async Task<CustomerEntity> CreateCustomer(CustomerModel customer)
     {
         await _customerRepository.BeginTransactionAsync();

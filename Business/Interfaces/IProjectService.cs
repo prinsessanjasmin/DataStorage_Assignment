@@ -13,4 +13,7 @@ public interface IProjectService
     Task<ProjectEntity> GetProjectByEndDate(DateTime endDate);
     Task<ProjectEntity> UpdateProject(int id, ProjectEntity updatedProject);
     Task<bool> DeleteProject(int id);
+
+    string ErrorMessage { get; }
+
 }
