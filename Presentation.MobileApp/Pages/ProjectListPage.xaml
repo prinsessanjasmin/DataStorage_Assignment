@@ -7,37 +7,38 @@
              x:DataType="{x:Type viewmodels:ProjectListViewModel}"
              
              Title="Project List">
-    <Grid RowDefinitions="auto, *, auto">
-        <VerticalStackLayout Grid.Row="0">
-            <Label Text="All Projects" VerticalOptions="Center"  HorizontalOptions="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Projects}" x:Name="List_AllProjects" Margin="10">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type viewmodels:ProjectListViewModel}">
-                        <Grid>
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, auto" Padding="10">
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="All Projects" VerticalOptions="Center"  HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="1">
+                <CollectionView ItemsSource="{Binding Projects}" x:Name="List_AllProjects" Margin="10" HeightRequest="500">
+                    <CollectionView.ItemTemplate>
+                        <DataTemplate x:DataType="{x:Type viewmodels:ProjectListViewModel}">
+                            <Grid>
                             
-                            <HorizontalStackLayout>
+                                <HorizontalStackLayout>
                                 
-                                <!--<Label Text="{Binding ProjectId}" FontSize="14" Padding="5"/>
-                                <Label Text="{Binding Title}" FontSize="16" Padding="5"/>
-                                <Label Text="{Binding About}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding Timeframe.StartDate}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding Timeframe.EndDate}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding ProjectStatus.StatusName}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding Customer.CustomerName}" FontSize="14"  Padding="5"/>-->
-                            </HorizontalStackLayout>
-                        </Grid>
-                    </DataTemplate>
-                </CollectionView.ItemTemplate>
-            </CollectionView>
-            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
-       TextColor="Red"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="2" Margin="20">
-            <Button x:Name="Btn_AddProject" Text="Add New Project" Command="{Binding NavigateToProjectAddCommand}" Margin="10"/>
-            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="10"/>
-        </VerticalStackLayout>
-    </Grid>
-   
+                                    <Label Text="{Binding ProjectId}" FontSize="14" Padding="5"/>
+                                    <Label Text="{Binding Title}" FontSize="16" Padding="5"/>
+                                    <Label Text="{Binding About}" FontSize="14"  Padding="5"/>
+                                    <!--<Label Text="{Binding Timeframe.StartDate}" FontSize="14"  Padding="5"/>
+                                    <Label Text="{Binding Timeframe.EndDate}" FontSize="14"  Padding="5"/>
+                                    <Label Text="{Binding ProjectStatus.StatusName}" FontSize="14"  Padding="5"/>
+                                    <Label Text="{Binding Customer.CustomerName}" FontSize="14"  Padding="5"/>-->
+                                </HorizontalStackLayout>
+                            </Grid>
+                        </DataTemplate>
+                    </CollectionView.ItemTemplate>
+                </CollectionView>
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
+           TextColor="Red"/>
+            </VerticalStackLayout>
+            <VerticalStackLayout Grid.Row="2" Margin="20">
+                <Button x:Name="Btn_AddProject" Text="Add New Project" Command="{Binding NavigateToProjectAddCommand}" Margin="10"/>
+                <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="10"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -37,6 +37,7 @@ builder.Services.AddScoped<ICompanyServiceService, CompanyServiceService>();
 builder.Services.AddScoped<ICompanyRoleService, CompanyRoleService>();
 builder.Services.AddScoped<ICurrencyService, CurrencyService>();
 builder.Services.AddScoped<IUnitService, UnitService>();
+builder.Services.AddScoped<IProjectStatusService, ProjectStatusService>();
 
 builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();

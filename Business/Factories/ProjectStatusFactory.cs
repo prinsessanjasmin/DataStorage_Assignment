@@ -1,5 +1,6 @@
 ﻿
 
+using Business.Models;
 using Data.Entities;
 
 namespace Business.Factories;
@@ -13,4 +14,13 @@ public static class ProjectStatusFactory
             StatusName = projectStatus,
         };
     }
+
+    public static ProjectStatusEntity Create(ProjectStatusModel projectStatus)
+    {
+        return new ProjectStatusEntity
+        {
+            StatusName = projectStatus.StatusName,
+        };
+    }
+
 }

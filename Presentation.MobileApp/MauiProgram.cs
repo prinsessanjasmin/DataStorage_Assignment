@@ -63,6 +63,7 @@ public static class MauiProgram
         builder.Services.AddTransient<ICompanyRoleService, CompanyRoleApiService>();
         builder.Services.AddTransient<IUnitService, UnitApiService>();
         builder.Services.AddTransient<ICurrencyService, CurrencyApiService>();
+        builder.Services.AddTransient<IProjectStatusService, ProjectStatusApiService>();
 
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<ProjectAddViewModel>();
