@@ -14,7 +14,7 @@
         <Grid Grid.Row="1" RowDefinitions="1*, 1*, 1*, 1*, 1*" Margin="10">
             <StackLayout Grid.Row="0" Padding="5">
                 <Label Text="Title:" Padding="0, 0, 0, 5"/>
-                <Entry x:Name="Entry_Title" Text="{Binding Title, Mode=TwoWay}"/>
+                <Entry x:Name="Entry_Title" Text="{Binding ServiceTitle, Mode=TwoWay}"/>
             </StackLayout>
             <StackLayout Grid.Row="1" Padding="5">
                 <Label Text="Price:" Padding="0, 0, 0, 5"/>

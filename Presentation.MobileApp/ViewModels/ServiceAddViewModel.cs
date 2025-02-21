@@ -65,7 +65,7 @@ namespace Presentation.MobileApp.ViewModels
                 return;
             }
 
-            CompanyService.Title = Title;
+            CompanyService.ServiceTitle = Title;
             CompanyService.Price = decimal.Parse(Price);
             CompanyService.UnitId = SelectedUnit.Id;
             CompanyService.CurrencyId = SelectedCurrency.Id;

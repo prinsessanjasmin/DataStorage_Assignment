@@ -1,5 +1,6 @@
 ﻿using Business.Interfaces;
 using Business.Models;
+using Business.Services;
 using CommunityToolkit.Mvvm.ComponentModel;
 using CommunityToolkit.Mvvm.Input;
 using Data.Entities;
@@ -82,6 +83,7 @@ public partial class ProjectAddViewModel : ObservableObject
         LoadCustomers().ConfigureAwait(false);
         LoadEmployees().ConfigureAwait(false);
         LoadProjectStatuses().ConfigureAwait(false);
+        InitializePickers().ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -245,5 +247,19 @@ public partial class ProjectAddViewModel : ObservableObject
     public async Task NavigateToHome()
     {
         await Shell.Current.GoToAsync("//MainPage");
+    }
+
+    public async Task InitializePickers()
+    {
+        ProjectStatuses = new ObservableCollection<ProjectStatusEntity>(await _projectStatusApiService.GetAllProjectStatuses());
+        Customers = new ObservableCollection<CustomerEntity>(await _customerApiService.GetAllCustomers());
+        Employees = new ObservableCollection<EmployeeEntity>(await _employeeApiService.GetAllEmployees());
+        CompanyServices = new ObservableCollection<CompanyServiceEntity>(await _companyServiceApiService.GetAllCompanyServices());
+
+        // Force UI update
+        OnPropertyChanged(nameof(ProjectStatuses));
+        OnPropertyChanged(nameof(Customers));
+        OnPropertyChanged(nameof(Employees));
+        OnPropertyChanged(nameof(CompanyServices));
     }
 }

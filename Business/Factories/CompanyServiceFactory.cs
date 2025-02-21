@@ -11,7 +11,7 @@ public static class CompanyServiceFactory
     {
         return new CompanyServiceEntity
         {
-            Title = model.Title,
+            Title = model.ServiceTitle,
             Price = model.Price,
             UnitId = model.UnitId,
             CurrencyId = model.CurrencyId,

@@ -8,9 +8,10 @@ using System.Diagnostics;
 
 namespace Business.Services;
 
-public class ProjectService(IProjectRepository projectRepository) : IProjectService
+public class ProjectService(IProjectRepository projectRepository, ICompanyServiceRepository companyServiceRepository) : IProjectService
 {
     private readonly IProjectRepository _projectRepository = projectRepository;
+    private readonly ICompanyServiceRepository _companyServiceRepository = companyServiceRepository;
 
     public string ErrorMessage => throw new NotImplementedException();
 
@@ -32,7 +33,15 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
                 return null!; 
             }
 
-            projectEntity.TotalPrice = HelperService.CalculateTotalPrice(projectEntity.Quantity, projectEntity.CompanyService.Price);
+            int cId = projectEntity.CompanyServiceId;
+            CompanyServiceEntity pcse = await _companyServiceRepository.GetAsync(x => x.Id == cId);
+            if (pcse == null)
+            {
+                Debug.WriteLine("Error: CompanyService is null. Cannot calculate TotalPrice.");
+                return null!;
+            }
+
+            projectEntity.TotalPrice = projectEntity.Quantity * pcse.Price;
 
             await _projectRepository.CreateAsync(projectEntity);
             await _projectRepository.SaveAsync();
@@ -143,7 +152,15 @@ public class ProjectService(IProjectRepository projectRepository) : IProjectServ
 
         try
         {
-            updatedProject.TotalPrice = HelperService.CalculateTotalPrice(updatedProject.Quantity, updatedProject.CompanyService.Price);
+            int cId = updatedProject.CompanyServiceId;
+            CompanyServiceEntity pcse = await _companyServiceRepository.GetAsync(x => x.Id == cId);
+            if (pcse == null)
+            {
+                Debug.WriteLine("Error: CompanyService is null. Cannot calculate TotalPrice.");
+                return null!;
+            }
+
+            updatedProject.TotalPrice = updatedProject.Quantity * pcse.Price;
             ProjectEntity project = await _projectRepository.UpdateAsync(x => x.Id == id, updatedProject);
             
             await _projectRepository.SaveAsync();
