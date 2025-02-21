@@ -9,8 +9,17 @@
 
         protected override Window CreateWindow(IActivationState? activationState)
         {
-            return new Window(new AppShell());
-            //return new NavigationPage(new ProjectListPage());
+            var window = new Window(new AppShell());
+
+            int newWidth = 500;
+            int newHeight = 800;
+
+            window.Width = newWidth;
+            window.Height = newHeight;
+
+            
+
+            return window;
 
         }
     }

@@ -15,7 +15,7 @@ public partial class ServiceListViewModel : ObservableObject
     private ObservableCollection<CompanyServiceEntity> _companyServices;
 
     [ObservableProperty]
-    private string _errorMessage;
+    private string? _errorMessage;
 
     public ServiceListViewModel(ICompanyServiceService companyServiceApiService)
     {

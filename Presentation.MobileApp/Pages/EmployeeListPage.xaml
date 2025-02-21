@@ -14,7 +14,7 @@
         <VerticalStackLayout Grid.Row="1">
             <CollectionView ItemsSource="{Binding Employees}" x:Name="List_AllEmployees" Margin="10">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate>
+                    <DataTemplate x:DataType="{x:Type viewmodels:EmployeeAddViewModel}">
                         <Grid>
                             <HorizontalStackLayout>
                                 <Label Text="{Binding FirstName}" FontSize="16" Padding="5"/>

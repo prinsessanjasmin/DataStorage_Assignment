@@ -17,7 +17,7 @@ public partial class CustomerListViewModel : ObservableObject
     private ObservableCollection<CustomerEntity> _customers;
 
     [ObservableProperty]
-    private string _errorMessage;
+    private string? _errorMessage;
 
     public CustomerListViewModel(ICustomerService customerApiService)
     {

@@ -5,12 +5,7 @@ namespace Presentation.MobileApp.ViewModels;
 
 public partial class ProjectAddViewModel : ObservableObject
 {
-    private string _errorMessage;
-    public string ErrorMessage
-    {
-        get => _errorMessage;
-        set => SetProperty(ref _errorMessage, value);
-    }
+
 
     [RelayCommand]
     public async Task NavigateToProjectList()

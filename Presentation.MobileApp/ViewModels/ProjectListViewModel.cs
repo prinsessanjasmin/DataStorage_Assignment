@@ -16,7 +16,7 @@ public partial class ProjectListViewModel : ObservableObject
     private ObservableCollection<ProjectEntity> _projects;
 
     [ObservableProperty]
-    private string _errorMessage;
+    private string? _errorMessage;
 
     public ProjectListViewModel(IProjectService projectApiService)
     {

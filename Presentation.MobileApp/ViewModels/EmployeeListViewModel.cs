@@ -15,7 +15,7 @@ namespace Presentation.MobileApp.ViewModels
         private ObservableCollection<EmployeeEntity> _employees;
 
         [ObservableProperty]
-        private string _errorMessage;
+        private string? _errorMessage;
 
         public EmployeeListViewModel(IEmployeeService employeeApiService)
         {
