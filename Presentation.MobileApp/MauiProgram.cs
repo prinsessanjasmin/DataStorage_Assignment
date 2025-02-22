@@ -18,6 +18,8 @@ public static class MauiProgram
             {
                 fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 fonts.AddFont("OpenSans-Semibold.ttf", "OpenSansSemibold");
+                fonts.AddFont("Arvo-bold.ttf", "Arvo");
+                fonts.AddFont("fa-solid-900.ttf", "FontAwesome");
             });
 
 #if WINDOWS
@@ -68,22 +70,36 @@ public static class MauiProgram
         builder.Services.AddTransient<MainPageViewModel>();
         builder.Services.AddTransient<ProjectAddViewModel>();
         builder.Services.AddTransient<ProjectListViewModel>();
+        builder.Services.AddTransient<ProjectDetailsViewModel>();
+        builder.Services.AddTransient<ProjectUpdateViewModel>();
         builder.Services.AddTransient<CustomerAddViewModel>();
         builder.Services.AddTransient<CustomerListViewModel>();
+        builder.Services.AddTransient<CustomerUpdateViewModel>();
         builder.Services.AddTransient<EmployeeAddViewModel>();
         builder.Services.AddTransient<EmployeeListViewModel>();
+        builder.Services.AddTransient<EmployeeDetailsViewModel>();
+        builder.Services.AddTransient<EmployeeUpdateViewModel>();
         builder.Services.AddTransient<ServiceListViewModel>();
         builder.Services.AddTransient<ServiceAddViewModel>();
+        builder.Services.AddTransient<ServiceDetailsViewModel>();
+        builder.Services.AddTransient<ServiceUpdateViewModel>();
 
         builder.Services.AddTransient<Pages.MainPage>();
         builder.Services.AddTransient<Pages.ProjectListPage>();
         builder.Services.AddTransient<Pages.ProjectAddPage>();
+        builder.Services.AddTransient<Pages.ProjectDetailsPage>();
+        builder.Services.AddTransient<Pages.ProjectUpdatePage>();
         builder.Services.AddTransient<Pages.CustomerAddPage>();
         builder.Services.AddTransient<Pages.CustomerListPage>();
+        builder.Services.AddTransient<Pages.CustomerUpdatePage>();
         builder.Services.AddTransient<Pages.EmployeeAddPage>();
         builder.Services.AddTransient<Pages.EmployeeListPage>();
+        builder.Services.AddTransient<Pages.EmployeeDetailsPage>();
+        builder.Services.AddTransient<Pages.EmployeeUpdatePage>();
         builder.Services.AddTransient<Pages.ServiceAddPage>();
         builder.Services.AddTransient<Pages.ServiceListPage>();
+        builder.Services.AddTransient<Pages.ServiceDetailsPage>();
+        builder.Services.AddTransient<Pages.ServiceUpdatePage>();
 #if DEBUG
         builder.Logging.AddDebug();
 #endif

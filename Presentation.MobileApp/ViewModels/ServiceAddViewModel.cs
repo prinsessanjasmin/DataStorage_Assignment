@@ -55,7 +55,6 @@ namespace Presentation.MobileApp.ViewModels
         [RelayCommand]
         public async Task SaveChanges()
         {
-
             if (string.IsNullOrWhiteSpace(Title) ||
             string.IsNullOrWhiteSpace(Price) ||
             SelectedCurrency == null ||

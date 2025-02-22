@@ -26,6 +26,16 @@
         Route="ProjectAddPage" />
 
     <ShellContent
+        Title="Project Details"
+        ContentTemplate="{DataTemplate pages:ProjectDetailsPage}"
+        Route="ProjectDetailsPage" />
+
+    <ShellContent
+        Title="Update Project"
+        ContentTemplate="{DataTemplate pages:ProjectUpdatePage}"
+        Route="ProjectUpdatePage" />
+
+    <ShellContent
         Title="All Customers"
         ContentTemplate="{DataTemplate pages:CustomerListPage}"
         Route="CustomerListPage" />
@@ -34,6 +44,11 @@
         Title="Add New Customer"
         ContentTemplate="{DataTemplate pages:CustomerAddPage}"
         Route="CustomerAddPage" />
+
+    <ShellContent
+        Title="Update Customer"
+        ContentTemplate="{DataTemplate pages:CustomerUpdatePage}"
+        Route="CustomerUpdatePage" />
 
     <ShellContent
         Title="All Employees"
@@ -46,6 +61,16 @@
         Route="EmployeeAddPage" />
 
     <ShellContent
+        Title="Employee Details"
+        ContentTemplate="{DataTemplate pages:EmployeeDetailsPage}"
+        Route="EmployeeDetailsPage" />
+
+    <ShellContent
+        Title="Update Employee"
+        ContentTemplate="{DataTemplate pages:EmployeeUpdatePage}"
+        Route="EmployeeUpdatePage" />
+
+    <ShellContent
         Title="AllServices"
         ContentTemplate="{DataTemplate pages:ServiceListPage}"
         Route="ServiceListPage" />
@@ -53,6 +78,16 @@
     <ShellContent
         Title="Add New Service"
         ContentTemplate="{DataTemplate pages:ServiceAddPage}"
-        Route="ServiceAddPage" />   
+        Route="ServiceAddPage" />
 
+    <ShellContent
+        Title="Service Details"
+        ContentTemplate="{DataTemplate pages:ServiceDetailsPage}"
+        Route="ServiceDetailsPage" />
+
+    <ShellContent
+        Title="Update Service"
+        ContentTemplate="{DataTemplate pages:ServiceUpdatePage}"
+        Route="ServiceUpdatePage" />
+    
 </Shell>

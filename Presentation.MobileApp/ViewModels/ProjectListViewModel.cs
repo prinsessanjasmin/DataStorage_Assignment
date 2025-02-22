@@ -55,6 +55,12 @@ public partial class ProjectListViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task NavigateToProjectDetails(int id)
+    {
+        await Shell.Current.GoToAsync("ProjectDetailsPage");
+    }
+
+    [RelayCommand]
     public async Task NavigateToProjectAdd()
     {
         await Shell.Current.GoToAsync("ProjectAddPage");

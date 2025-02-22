@@ -50,6 +50,27 @@ public partial class ServiceListViewModel : ObservableObject
     }
 
     [RelayCommand]
+    public async Task NavigateToServiceUpdate(int id)
+    {
+        await Shell.Current.GoToAsync("ServiceUpdatePage");
+    }
+
+    [RelayCommand]
+    public async Task DeleteService(int id)
+    {
+        bool result = await _companyServiceApiService.DeleteCompanyService(id);
+        if (result)
+        {
+            await LoadCompanyServices();
+            ErrorMessage = "Service successfully deleted.";
+        }
+        else
+        {
+            ErrorMessage = _companyServiceApiService.ErrorMessage;
+        }
+    }
+
+    [RelayCommand]
     public async Task NavigateToServiceAdd()
     {
         await Shell.Current.GoToAsync("ServiceAddPage");

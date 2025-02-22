@@ -4,34 +4,34 @@
              x:Class="Presentation.MobileApp.Pages.EmployeeListPage"
              
               xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+              xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
               x:DataType="{x:Type viewmodels:EmployeeListViewModel}"
              
              Title="All Employees">
-    <Grid RowDefinitions="auto, *, auto">
-        <VerticalStackLayout Grid.Row="0">
-            <Label Text="All Employees" VerticalOptions="Center"  HorizontalOptions="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Employees}" x:Name="List_AllEmployees" Margin="10">
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, auto" Padding="10" ColumnDefinitions="2*, 2*, 2*, 1*" Margin="10">
+            <Label Grid.Row="0" Grid.Column="0" Text="First Name" FontAttributes="Bold" />
+            <Label Grid.Row="0" Grid.Column="1" Text="Last Name" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.Column="2" Text="Role" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.Column="3" Text="Details" FontAttributes="Bold"/>
+
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding Employees}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type viewmodels:EmployeeAddViewModel}">
-                        <Grid>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding FirstName}" FontSize="16" Padding="5"/>
-                                <Label Text="{Binding LastName}" FontSize="16"  Padding="5"/>
-                                <Label Text="{Binding Email}" FontSize="14"  Padding="5"/>
-                                <Label Text="{Binding PhoneNumber}" FontSize="14"  Padding="5"/>
-                            </HorizontalStackLayout>
+                    <DataTemplate x:DataType="{x:Type entities:EmployeeEntity}">
+                        <Grid ColumnDefinitions="2*, 2*, 2*, 1*">
+                            <Label Grid.Column="0" Text="{Binding FirstName}" FontSize="14" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="{Binding LastName}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="2" Text="{Binding CompanyRole.CompanyRole}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Button Grid.Column="3" x:Name="Btn_EmployeeDetails" Text="i" FontAttributes="Bold" FontFamily="Arvo" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:EmployeeListViewModel}}, Path=NavigateToEmployeeDetailsCommand}" CommandParameter="{Binding Id}" Margin="4" HorizontalOptions="Center" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
-   TextColor="Red"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="2" Margin="20">
-            <Button x:Name="Btn_AddEmployee" Text="Add New Employee" Command="{Binding NavigateToEmployeeAddCommand}" Margin="10"/>
-            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="10"/>
-        </VerticalStackLayout>
-    </Grid>
+            <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="4" >
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" Margin="10, 20" TextColor="Red"/>
+                <Button x:Name="Btn_AddEmployee" Text="Add New Employee" Command="{Binding NavigateToEmployeeAddCommand}" Margin="5"/>
+                <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="5"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

@@ -4,34 +4,40 @@
              x:Class="Presentation.MobileApp.Pages.ServiceListPage"
              
               xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+              xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
               x:DataType="{x:Type viewmodels:ServiceListViewModel}"
              
              Title="All Services">
-    <Grid RowDefinitions="auto, *, auto">
-        <VerticalStackLayout Grid.Row="0">
-            <Label Text="All Services" VerticalOptions="Center"  HorizontalOptions="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="1">
-            <CollectionView ItemsSource="{Binding CompanyServices}" x:Name="List_AllCompanyServices" Margin="10">
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, auto" Padding="10" ColumnDefinitions="7*, 4*, 4*, 3*, 3*, 3*" Margin="10">
+            <Label Grid.Row="0" Grid.Column="0" Text="Title" FontAttributes="Bold" />
+            <Label Grid.Row="0" Grid.Column="1" Text="Price" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.Column="2" Text="Currency" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.Column="3" Text="Unit" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.Column="4" Grid.ColumnSpan="2" Text="Actions" FontAttributes="Bold" HorizontalOptions="Center"/>
+
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="6" ItemsSource="{Binding CompanyServices}">
                 <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type viewmodels:ServiceAddViewModel}">
-                        <Grid>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding ServiceTitle}" FontSize="16" Padding="5"/>
-                                <Label Text="{Binding Price}" FontSize="14"  Padding="5"/>
-                                <!--<Label Text="{Binding Currency.CurrencyName}" FontSize="14" Padding="5"/>
-                                <Label Text="{Binding Unit.UnitName}" FontSize="14" Padding="5"/>-->
-                            </HorizontalStackLayout>
+                    <DataTemplate x:DataType="{x:Type entities:CompanyServiceEntity}">
+                        <Grid ColumnDefinitions="7*, 4*, 4*, 3*, 3*, 3*">
+                            <Label Grid.Column="0" Text="{Binding Title}" FontSize="14" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="{Binding Price}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="2" Text="{Binding Currency.CurrencyName}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Label Grid.Column="3" Text="{Binding Unit.UnitName}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Button Grid.Column="4" x:Name="Btn_UpdateService" Text="&#xf1f8;" FontFamily="FontAwesome" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ServiceListViewModel}}, Path=NavigateToServiceUpdateCommand}" CommandParameter="{Binding Id}" Margin="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Button BackgroundColor="Red" Grid.Column="5" x:Name="Btn_DeleteService" Text="&#xf304;" FontFamily="FontAwesome" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:ServiceListViewModel}}, Path=DeleteServiceCommand}" CommandParameter="{Binding Id}" Margin="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
-   TextColor="Red"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="2" Margin="20">
-            <Button x:Name="Btn_AddCompanyService" Text="Add New Service" Command="{Binding NavigateToServiceAddCommand}" Margin="10"/>
-            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="10"/>
-        </VerticalStackLayout>
-    </Grid>
+
+            <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="6" >
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" Margin="10, 20" TextColor="Red"/>
+                <Button x:Name="Btn_AddCompanyService" Text="Add New Service" Command="{Binding NavigateToServiceAddCommand}" Margin="5"/>
+                <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="5"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

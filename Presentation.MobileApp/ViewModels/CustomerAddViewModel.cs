@@ -20,10 +20,11 @@ public partial class CustomerAddViewModel : ObservableObject
     [ObservableProperty]
     private string? _customerName;
 
-    public CustomerAddViewModel(ICustomerService customerApiService)
+    public CustomerAddViewModel(ICustomerService customerApiService, CustomerListViewModel customerListViewModel)
     {
         _customerApiService = customerApiService;
         _customer = new CustomerModel();
+ 
     }
 
     [RelayCommand]
@@ -51,8 +52,6 @@ public partial class CustomerAddViewModel : ObservableObject
             ErrorMessage = _customerApiService.ErrorMessage;
         }
     }
-
-
 
     [RelayCommand]
     public async Task NavigateToCustomerList()

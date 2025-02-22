@@ -3,6 +3,7 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              
               xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
               x:DataType="{x:Type viewmodels:EmployeeAddViewModel}"
              
              x:Class="Presentation.MobileApp.Pages.EmployeeAddPage"

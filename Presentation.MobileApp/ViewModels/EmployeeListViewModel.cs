@@ -50,6 +50,12 @@ namespace Presentation.MobileApp.ViewModels
         }
 
         [RelayCommand]
+        public async Task NavigateToEmployeeDetails(int id)
+        {
+            await Shell.Current.GoToAsync("EmployeeDetailsPage");
+        }
+
+        [RelayCommand]
         public async Task NavigateToEmployeeAdd()
         {
             await Shell.Current.GoToAsync("EmployeeAddPage");

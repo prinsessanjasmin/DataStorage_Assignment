@@ -4,6 +4,7 @@
              x:Class="Presentation.MobileApp.Pages.ServiceAddPage"
              
               xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
               x:DataType="{x:Type viewmodels:ServiceAddViewModel}"
              
              Title="Add New Service">
@@ -14,7 +15,7 @@
         <Grid Grid.Row="1" RowDefinitions="1*, 1*, 1*, 1*, 1*" Margin="10">
             <StackLayout Grid.Row="0" Padding="5">
                 <Label Text="Title:" Padding="0, 0, 0, 5"/>
-                <Entry x:Name="Entry_Title" Text="{Binding ServiceTitle, Mode=TwoWay}"/>
+                <Entry x:Name="Entry_Title" Text="{Binding Title, Mode=TwoWay}"/>
             </StackLayout>
             <StackLayout Grid.Row="1" Padding="5">
                 <Label Text="Price:" Padding="0, 0, 0, 5"/>

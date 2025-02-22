@@ -101,7 +101,7 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/customerService/{id}");
+            var response = await _httpClient.DeleteAsync($"api/companyService/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

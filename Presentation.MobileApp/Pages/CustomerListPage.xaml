@@ -4,36 +4,35 @@
              x:Class="Presentation.MobileApp.Pages.CustomerListPage"
              
              xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
              x:DataType="{x:Type viewmodels:CustomerListViewModel}"
              
              Title="All Customers">
-    <Grid RowDefinitions="auto, *, auto">
-        <VerticalStackLayout Grid.Row="0">
-            <Label Text="All Customers" VerticalOptions="Center"  HorizontalOptions="Center" />
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="1">
-            <CollectionView ItemsSource="{Binding Customers}" x:Name="List_AllCustomers" Margin="10">
-                <CollectionView.ItemTemplate>
-                    <DataTemplate x:DataType="{x:Type viewmodels:CustomerAddViewModel}">
-                        <Grid>
-                            <HorizontalStackLayout>
-                                <Label Text="{Binding CustomerName}" FontSize="16" Padding="5"/>
-                                <!--<Label Text="{Binding CustomerReference.ContactPerson.FirstName}" FontSize="14" Padding="5"/>
-                                <Label Text="{Binding CustomerReference.ContactPerson.LastName}" FontSize="14" Padding="5"/>
-                                <Label Text="{Binding CustomerReference.ContactPerson.Email}" FontSize="14" Padding="5"/>
-                                <Label Text="{Binding CustomerReference.ContactPerson.PhoneNumber}" FontSize="14" Padding="5"/>-->
 
-                            </HorizontalStackLayout>
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, auto" Padding="10" ColumnDefinitions="1*, 4*, 2*, 2*" Margin="10">
+            <Label Grid.Row="0" Grid.Column="0" Text="Id" FontAttributes="Bold" />
+            <Label Grid.Row="0" Grid.Column="1" Text="Name" FontAttributes="Bold"/>
+            <Label Grid.Row="0" Grid.ColumnSpan="2" Grid.Column="2" Text="Actions" FontAttributes="Bold" HorizontalTextAlignment="Center"/>
+
+            <CollectionView Grid.Row="1" Grid.ColumnSpan="4" ItemsSource="{Binding Customers}">
+                <CollectionView.ItemTemplate>
+                    <DataTemplate x:DataType="{x:Type entities:CustomerEntity}">
+                        <Grid ColumnDefinitions="1*, 4*, 2*, 2*">
+                            <Label Grid.Column="0" Text="{Binding Id}" FontSize="14" VerticalTextAlignment="Center" />
+                            <Label Grid.Column="1" Text="{Binding CustomerName}" FontSize="14" VerticalTextAlignment="Center"/>
+                            <Button Grid.Column="2" x:Name="Btn_UpdateCustomer" Text="Update" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CustomerListViewModel}}, Path=NavigateToCustomerUpdateCommand}" CommandParameter="{Binding Id}" Margin="4" HorizontalOptions="Center" VerticalOptions="Center"/>
+                            <Button BackgroundColor="Red" Grid.Column="3" x:Name="Btn_DeleteCustomer" Text="Delete" FontAttributes="Bold" Command="{Binding Source={RelativeSource AncestorType={x:Type viewmodels:CustomerListViewModel}}, Path=DeleteCustomerCommand}" CommandParameter="{Binding Id}" Margin="4" HorizontalOptions="Center" VerticalOptions="Center"/>
                         </Grid>
                     </DataTemplate>
                 </CollectionView.ItemTemplate>
             </CollectionView>
-            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
-   TextColor="Red"/>
-        </VerticalStackLayout>
-        <VerticalStackLayout Grid.Row="2" Margin="20">
-            <Button x:Name="Btn_AddCustomer" Text="Add New Customer" Command="{Binding NavigateToCustomerAddCommand}" Margin="10"/>
-            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="10"/>
-        </VerticalStackLayout>
-    </Grid>
+
+            <VerticalStackLayout Grid.Row="2" Grid.ColumnSpan="4" >
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" TextColor="Red" Margin="10, 20"/>
+                <Button x:Name="Btn_AddCustomer" Text="Add New Customer" Command="{Binding NavigateToCustomerAddCommand}" Margin="5"/>
+                <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }" Margin="5"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

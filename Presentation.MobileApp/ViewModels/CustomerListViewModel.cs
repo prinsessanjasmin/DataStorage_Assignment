@@ -23,6 +23,8 @@ public partial class CustomerListViewModel : ObservableObject
     {
         _customerApiService = customerApiService;
         _customers = new ObservableCollection<CustomerEntity>();
+
+        LoadCustomers().ConfigureAwait(false);
     }
 
     [RelayCommand]
@@ -49,6 +51,27 @@ public partial class CustomerListViewModel : ObservableObject
         {
             ErrorMessage = _customerApiService.ErrorMessage;
         }
+    }
+
+    [RelayCommand]
+    public async Task DeleteCustomer(int id)
+    {
+        bool result = await _customerApiService.DeleteCustomer(id);
+        if (result)
+        {
+            await LoadCustomers();
+            ErrorMessage = "Customer successfully deleted.";
+        }
+        else
+        {
+            ErrorMessage = _customerApiService.ErrorMessage;
+        }
+    }
+
+    [RelayCommand]
+    public async Task NavigateToCustomerUpdate(int id)
+    {
+        await Shell.Current.GoToAsync("CustomerUpdatePage");
     }
 
     [RelayCommand]
