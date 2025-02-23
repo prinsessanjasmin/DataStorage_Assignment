@@ -71,7 +71,7 @@ public partial class CustomerListViewModel : ObservableObject
     [RelayCommand]
     public async Task NavigateToCustomerUpdate(int id)
     {
-        await Shell.Current.GoToAsync("CustomerUpdatePage");
+        await Shell.Current.GoToAsync($"CustomerUpdatePage?customerId={id}");
     }
 
     [RelayCommand]

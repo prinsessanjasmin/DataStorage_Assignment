@@ -2,11 +2,44 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Presentation.MobileApp.Pages.EmployeeUpdatePage"
-             Title="EmployeeUpdatePage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             
+             xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             x:DataType="{x:Type viewmodels:EmployeeUpdateViewModel}"
+             
+             Title="Update Employee">
+    <Grid RowDefinitions="auto, *, auto" Padding="10">
+        <VerticalStackLayout Grid.Row="0">
+            <Label Text="Update Employee" VerticalOptions="Center" HorizontalOptions="Center" />
+        </VerticalStackLayout>
+        <Grid Grid.Row="1" RowDefinitions="1*, 1*, 1*, 1*, 1*, 1*" Margin="10">
+            <StackLayout Grid.Row="0" Padding="5">
+                <Label Text="First Name:" Padding="0, 0, 0, 5"/>
+                <Entry x:Name="Entry_FirstName" Text="{Binding FirstName, Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="1" Padding="5">
+                <Label Text="Last name:" Padding="0, 0, 0, 5"/>
+                <Entry x:Name="Entry_LastName" Text="{Binding LastName, Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="2" Padding="5">
+                <Label Text="Email:" Padding="0, 0, 0, 5"/>
+                <Entry x:Name="Entry_Email" Text="{Binding Email, Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="3" Padding="5">
+                <Label Text="Phone Number:" Padding="0, 0, 0, 5"/>
+                <Entry x:Name="Entry_PhoneNumber" Text="{Binding PhoneNumber, Mode=TwoWay}" />
+            </StackLayout>
+            <StackLayout Grid.Row="4" Padding="5">
+                <Picker x:Name="Picker_CompanyRole" Title="Select Your Role" ItemsSource="{Binding Roles}" ItemDisplayBinding="{Binding CompanyRole}" SelectedItem="{Binding SelectedRole, Mode=TwoWay}"/>
+            </StackLayout>
+            <StackLayout Grid.Row="5" Padding="5">
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}"
+                TextColor="Red" Padding="0, 0, 0, 5"/>
+            </StackLayout>
+        </Grid>
+        <VerticalStackLayout Grid.Row="2" Margin="20">
+            <Button x:Name="Btn_SaveChanges" Text="Update Employee" Command="{Binding SaveChangesCommand}" Margin="10"/>
+            <Button x:Name="Btn_GoToEmployeeList" Text="All Employees" Command="{Binding NavigateToEmployeeListCommand}"  Margin="10"/>
+            <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="10"/>
+        </VerticalStackLayout>
+    </Grid>
 </ContentPage>

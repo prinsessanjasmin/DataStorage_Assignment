@@ -21,6 +21,8 @@ namespace Presentation.MobileApp.ViewModels
         {
             _employeeApiService = employeeApiService;
             _employees = new ObservableCollection<EmployeeEntity>();
+
+            LoadEmployees().ConfigureAwait(false);
         }
 
         [RelayCommand]
@@ -52,7 +54,7 @@ namespace Presentation.MobileApp.ViewModels
         [RelayCommand]
         public async Task NavigateToEmployeeDetails(int id)
         {
-            await Shell.Current.GoToAsync("EmployeeDetailsPage");
+            await Shell.Current.GoToAsync($"EmployeeDetailsPage?employeeId={id}");
         }
 
         [RelayCommand]

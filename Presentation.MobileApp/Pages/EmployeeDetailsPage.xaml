@@ -2,11 +2,38 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Presentation.MobileApp.Pages.EmployeeDetailsPage"
-             Title="EmployeeDetailsPage">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+             
+             xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
+             x:DataType="{x:Type viewmodels:EmployeeDetailsViewModel}"
+
+             Title="Employee Details">
+   
+    <Grid RowDefinitions="1*, auto" Margin="20">
+        <VerticalStackLayout Grid.Row="0" Padding="20">
+            <Label Text="Id:" FontSize="12"/>
+            <Label Grid.Row="11" Text="{Binding Employee.Id}" FontSize="14" Padding="0, 0, 0, 10"/>
+            
+            <Label Text="First Name:" FontSize="12"/>
+            <Label Text="{Binding Employee.FirstName}" FontSize="14" Padding="0, 0, 0, 10"/>
+
+            <Label Text="Last Name:" FontSize="12"/>
+            <Label Text="{Binding Employee.LastName}" FontSize="14" Padding="0, 0, 0, 10"/>
+            
+            <Label Text="Email:" FontSize="12"/>
+            <Label Text="{Binding Employee.Email}" FontSize="14" Padding="0, 0, 0, 10"/>
+            
+            <Label Text="Phone Number:" FontSize="12"/>
+            <Label Text="{Binding Employee.PhoneNumber}" FontSize="14" Padding="0, 0, 0, 10"/>
+            
+            <Label Text="Role:" FontSize="12"/>
+            <Label Text="{Binding Employee.CompanyRole.CompanyRole}" FontSize="14" Padding="0, 0, 0, 10"/>
+        </VerticalStackLayout>
+        <StackLayout Grid.Row="1">
+            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" TextColor="Red" Margin="10, 20"/>
+            <Button x:Name="Btn_UpdateEmployee" Text="Edit Employee" Margin="5" Command="{Binding NavigateToEmployeeUpdateCommand}" CommandParameter="{Binding Employee.Id}"/>
+            <Button x:Name="Btn_Delete" BackgroundColor="Red" Text="Delete Employee" Command="{Binding DeleteEmployeeCommand}" CommandParameter="{Binding Employee.Id}" Margin="5"/>
+            <Button Text="Main Menu" Command="{Binding NavigateToHomeCommand}" Margin="5"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

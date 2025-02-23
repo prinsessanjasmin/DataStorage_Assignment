@@ -9,10 +9,4 @@ public partial class EmployeeListPage : ContentPage
 		InitializeComponent();
         BindingContext = viewModel;
     }
-
-    protected override async void OnAppearing()
-    {
-        base.OnAppearing();
-        await ((EmployeeListViewModel)BindingContext).LoadEmployees();
-    }
 }

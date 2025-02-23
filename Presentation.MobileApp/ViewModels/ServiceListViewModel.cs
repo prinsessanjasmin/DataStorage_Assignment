@@ -52,7 +52,7 @@ public partial class ServiceListViewModel : ObservableObject
     [RelayCommand]
     public async Task NavigateToServiceUpdate(int id)
     {
-        await Shell.Current.GoToAsync("ServiceUpdatePage");
+        await Shell.Current.GoToAsync($"ServiceDetailsPage?serviceId={id}");
     }
 
     [RelayCommand]
