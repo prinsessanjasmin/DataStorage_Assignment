@@ -107,6 +107,12 @@ public partial class CustomerUpdateViewModel : ObservableObject, IQueryAttributa
     }
 
     [RelayCommand]
+    public async Task NavigateToCustomerList()
+    {
+        await Shell.Current.GoToAsync("CustomerListPage");
+    }
+
+    [RelayCommand]
     public async Task NavigateToHome()
     {
         await Shell.Current.GoToAsync("//MainPage");

@@ -119,7 +119,7 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
             TimeframeId = Project.TimeframeId,
             Timeframe = new TimeframeEntity
             {
-                Id = Project.TimeframeId,  // Keep the same timeframe ID
+                Id = Project.TimeframeId,  
                 StartDate = SelectedStartDate,
                 EndDate = SelectedEndDate
             },
@@ -226,6 +226,12 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
         {
             ErrorMessage = _projectApiService.ErrorMessage;
         }
+    }
+
+    [RelayCommand]
+    public async Task NavigateToProjectList()
+    {
+        await Shell.Current.GoToAsync("ProjectListPage");
     }
 
     [RelayCommand]

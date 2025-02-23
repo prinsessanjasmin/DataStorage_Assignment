@@ -26,13 +26,6 @@ public partial class ServiceDetailsViewModel : ObservableObject, IQueryAttributa
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
-        Console.WriteLine("ApplyQueryAttributes called!");
-        Console.WriteLine("Received query parameters:");
-        foreach (var key in query.Keys)
-        {
-            Console.WriteLine($"KEYS {key}: {query[key]}");
-        }
-
         //Method constructed by ChatGPT 4o
         if (query.TryGetValue("serviceId", out var idValue) && int.TryParse(idValue.ToString(), out int serviceId))
         {
@@ -54,7 +47,6 @@ public partial class ServiceDetailsViewModel : ObservableObject, IQueryAttributa
         else
         {
             ErrorMessage = "Error: No service selected.";
-            Console.WriteLine("Error: No service selected.");
         }
     }
 

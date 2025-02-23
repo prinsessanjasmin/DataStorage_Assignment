@@ -136,6 +136,12 @@ public partial class EmployeeUpdateViewModel : ObservableObject, IQueryAttributa
     }
 
     [RelayCommand]
+    public async Task NavigateToEmployeeList()
+    {
+        await Shell.Current.GoToAsync("EmployeeListPage");
+    }
+
+    [RelayCommand]
     public async Task NavigateToHome()
     {
         await Shell.Current.GoToAsync("//MainPage");

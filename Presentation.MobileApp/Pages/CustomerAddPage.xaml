@@ -4,6 +4,7 @@
              x:Class="Presentation.MobileApp.Pages.CustomerAddPage"
              
              xmlns:viewmodels="clr-namespace:Presentation.MobileApp.ViewModels"
+             
              xmlns:entities="clr-namespace:Data.Entities;assembly=Data"
              x:DataType="{x:Type viewmodels:CustomerAddViewModel}"
              

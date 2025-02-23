@@ -71,7 +71,7 @@ public partial class ServiceUpdateViewModel : ObservableObject, IQueryAttributab
 
         var updatedCompanyService = new CompanyServiceEntity
         {
-            Id = CompanyService.Id,  // Keep the same ID
+            Id = CompanyService.Id, 
             Title = Title,
             Price = Price,
             Unit = SelectedUnit,
