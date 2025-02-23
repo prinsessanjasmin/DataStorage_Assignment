@@ -153,6 +153,7 @@ public class ProjectService(IProjectRepository projectRepository, ICompanyServic
         try
         {
             int cId = updatedProject.CompanyServiceId;
+           
             CompanyServiceEntity pcse = await _companyServiceRepository.GetAsync(x => x.Id == cId);
             if (pcse == null)
             {
@@ -161,6 +162,7 @@ public class ProjectService(IProjectRepository projectRepository, ICompanyServic
             }
 
             updatedProject.TotalPrice = updatedProject.Quantity * pcse.Price;
+
             ProjectEntity project = await _projectRepository.UpdateAsync(x => x.Id == id, updatedProject);
             
             await _projectRepository.SaveAsync();

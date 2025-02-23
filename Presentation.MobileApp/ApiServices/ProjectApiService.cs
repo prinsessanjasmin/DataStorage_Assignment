@@ -1,6 +1,7 @@
 ﻿using Business.Interfaces;
 using Business.Models;
 using Data.Entities;
+using System.Diagnostics;
 using System.Net.Http.Json;
 
 namespace Presentation.MobileApp.ApiServices;
@@ -14,7 +15,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/project", project);
+            var response = await _httpClient.PostAsJsonAsync("api/Project", project);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -34,7 +35,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/project");
+            var response = await _httpClient.GetAsync("api/Project");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -54,7 +55,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/project/{endDate}");
+            var response = await _httpClient.GetAsync($"api/Project/{endDate}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -78,7 +79,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/project/{id}");
+            var response = await _httpClient.GetAsync($"api/Project/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -102,7 +103,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/project/{projectName}");
+            var response = await _httpClient.GetAsync($"api/Project/{projectName}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -126,7 +127,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/project/{startDate}");
+            var response = await _httpClient.GetAsync($"api/Project/{startDate}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -150,7 +151,8 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/project/{id}", updatedProject);
+            var response = await _httpClient.PutAsJsonAsync($"api/Project/{id}", updatedProject);
+
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -158,7 +160,8 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
             }
             else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
             {
-                ErrorMessage = "Failed to update project";
+                var errorDetails = await response.Content.ReadAsStringAsync();
+                ErrorMessage = $"Failed to update project: {errorDetails}";
                 return null!;
             }
             return null!;
@@ -174,7 +177,7 @@ public class ProjectApiService(HttpClient httpClient) : IProjectService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/project/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Project/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

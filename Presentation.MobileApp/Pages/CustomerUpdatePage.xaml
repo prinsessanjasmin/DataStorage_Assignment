@@ -14,12 +14,13 @@
         <Grid Grid.Row="1" Margin="10">
             <VerticalStackLayout Padding="5">
                 <Label Text="Customer Name:" Padding="0, 0, 0, 5"/>
-                <Entry x:Name="Entry_CustomerName" Text="{Binding Customer.CustomerName, Mode=TwoWay}"/>
+                <Entry x:Name="Entry_CustomerName" Text="{Binding CustomerName, Mode=TwoWay}"/>
             </VerticalStackLayout>
         </Grid>
         <VerticalStackLayout Grid.Row="2" Margin="20">
             <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" TextColor="Red" Padding="0, 0, 0, 5"/>
-            <Button x:Name="Btn_SaveChanges" Text="Add Customer" Command="{Binding SaveChangesCommand}" Margin="10"/>
+            <Button x:Name="Btn_SaveChanges" Text="Update Customer" Command="{Binding SaveChangesCommand}" Margin="10"/>
+            <Button x:Name="Btn_DeleteCustomer" Text="Delete" Command="{Binding DeleteCustomerCommand}" CommandParameter="{Binding Id}" BackgroundColor="Red" Margin="10" TextColor="White"/>
             <Button x:Name="Btn_GoToCustomerList" Text="All Customers" Command="{Binding NavigateToCustomerListCommand}"  Margin="10"/>
             <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="10"/>
         </VerticalStackLayout>

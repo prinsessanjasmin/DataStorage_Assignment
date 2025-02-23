@@ -11,24 +11,24 @@
     <Grid RowDefinitions="1*, auto" Margin="20">
         <VerticalStackLayout Grid.Row="0" Padding="20">
             <Label Text="Id:" FontSize="12"/>
-            <Label Grid.Row="11" Text="{Binding Service.Id}" FontSize="14" Padding="0, 0, 0, 10"/>
+            <Label Grid.Row="11" Text="{Binding CompanyService.Id}" FontSize="14" Padding="0, 0, 0, 10"/>
 
             <Label Text="Title:" FontSize="12"/>
-            <Label Text="{Binding Service.Title}" FontSize="14" Padding="0, 0, 0, 10"/>
+            <Label Text="{Binding CompanyService.Title}" FontSize="14" Padding="0, 0, 0, 10"/>
 
             <Label Text="Price:" FontSize="12"/>
-            <Label Text="{Binding Service.Price}" FontSize="14" Padding="0, 0, 0, 10"/>
+            <Label Text="{Binding CompanyService.Price}" FontSize="14" Padding="0, 0, 0, 10"/>
 
             <Label Text="Unit:" FontSize="12"/>
-            <Label Text="{Binding Service.Unit.UnitName}" FontSize="14" Padding="0, 0, 0, 10"/>
+            <Label Text="{Binding CompanyService.Unit.UnitName}" FontSize="14" Padding="0, 0, 0, 10"/>
 
             <Label Text="Currency:" FontSize="12"/>
-            <Label Text="{Binding Service.Currency.CurrencyName}" FontSize="14" Padding="0, 0, 0, 10"/>
+            <Label Text="{Binding CompanyService.Currency.CurrencyName}" FontSize="14" Padding="0, 0, 0, 10"/>
         </VerticalStackLayout>
         <StackLayout Grid.Row="1">
-            <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" TextColor="Red" Margin="10, 20"/>
-            <Button x:Name="Btn_UpdateService" Text="Edit Service" Margin="5" Command="{Binding NavigateToServiceUpdateCommand}" CommandParameter="{Binding Service.Id}"/>
-            <Button x:Name="Btn_Delete" BackgroundColor="Red" Text="Delete Service" Command="{Binding DeleteServiceCommand}" CommandParameter="{Binding Service.Id}" Margin="5"/>
+            <Label Text="{Binding ErrorMessage}" TextColor="Red" Margin="10, 20"/>
+            <Button x:Name="Btn_UpdateService" Text="Edit Service" Margin="5" Command="{Binding NavigateToServiceUpdateCommand}" CommandParameter="{Binding CompanyService.Id}"/>
+            <Button x:Name="Btn_Delete" BackgroundColor="Red" Text="Delete Service" Command="{Binding DeleteServiceCommand}" CommandParameter="{Binding CompanyService.Id}" Margin="5"/>
             <Button Text="Main Menu" Command="{Binding NavigateToHomeCommand}" Margin="5"/>
         </StackLayout>
     </Grid>

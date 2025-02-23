@@ -15,7 +15,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/employee", employee);
+            var response = await _httpClient.PostAsJsonAsync("api/Employee", employee);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -35,7 +35,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/employee");
+            var response = await _httpClient.GetAsync("api/Employee");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -55,7 +55,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/employee/{email}");
+            var response = await _httpClient.GetAsync($"api/Employee/{email}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -79,7 +79,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/employee/{id}");
+            var response = await _httpClient.GetAsync($"api/Employee/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -103,7 +103,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/employee/{id}", updatedEmployee);
+            var response = await _httpClient.PutAsJsonAsync($"api/Employee/{id}", updatedEmployee);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -126,7 +126,7 @@ public class EmployeeApiService(HttpClient httpClient) : IEmployeeService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/employee/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Employee/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

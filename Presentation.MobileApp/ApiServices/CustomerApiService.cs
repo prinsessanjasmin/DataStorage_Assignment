@@ -14,7 +14,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/customer", customer);
+            var response = await _httpClient.PostAsJsonAsync("api/Customer", customer);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -34,7 +34,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/customer");
+            var response = await _httpClient.GetAsync("api/Customer");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -54,7 +54,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/customer/{id}");
+            var response = await _httpClient.GetAsync($"api/Customer/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -78,7 +78,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/customer/{name}");
+            var response = await _httpClient.GetAsync($"api/Customer/{name}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -102,7 +102,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/customer/{id}", updatedCustomer);
+            var response = await _httpClient.PutAsJsonAsync($"api/Customer/{id}", updatedCustomer);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -126,7 +126,7 @@ public class CustomerApiService(HttpClient httpClient) : ICustomerService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/customer/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Customer/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

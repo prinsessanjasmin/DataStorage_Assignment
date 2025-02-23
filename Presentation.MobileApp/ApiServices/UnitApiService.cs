@@ -14,7 +14,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/unit", unit);
+            var response = await _httpClient.PostAsJsonAsync("api/Unit", unit);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -36,7 +36,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/unit");
+            var response = await _httpClient.GetAsync("api/Unit");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -56,7 +56,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/unit/{id}");
+            var response = await _httpClient.GetAsync($"api/Unit/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -80,7 +80,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/unit/{unitName}");
+            var response = await _httpClient.GetAsync($"api/Unit/{unitName}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -104,7 +104,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/unit/{id}", updatedUnit);
+            var response = await _httpClient.PutAsJsonAsync($"api/Unit/{id}", updatedUnit);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -128,7 +128,7 @@ public class UnitApiService(HttpClient httpClient) : IUnitService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/unit/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Unit/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

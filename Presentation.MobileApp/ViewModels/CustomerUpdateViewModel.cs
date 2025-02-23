@@ -31,15 +31,26 @@ public partial class CustomerUpdateViewModel : ObservableObject, IQueryAttributa
         _customerApiService = customerApiService;
         _customerListViewModel = customerListViewModel;
         _customers = new ObservableCollection<CustomerEntity>();
-        _customer = new CustomerEntity();
+        Customer = new CustomerEntity();
     }
 
     [RelayCommand]
     public async Task SaveChanges()
     {
-        Customer.CustomerName = CustomerName;
+        if (Customer == null || Customer.Id == 0)
+        {
+            ErrorMessage = "Invalid customer ID. Cannot update.";
+            return;
+        }
 
-        var finishedCustomer = await _customerApiService.UpdateCustomer(Customer.Id, Customer);
+        var updatedCustomer = new CustomerEntity()
+        {
+            Id = Customer.Id,
+            CustomerName = CustomerName
+        };
+        
+
+        var finishedCustomer = await _customerApiService.UpdateCustomer(Customer.Id, updatedCustomer);
         if (finishedCustomer != null)
         {
             await Shell.Current.GoToAsync("CustomerListPage");
@@ -57,6 +68,10 @@ public partial class CustomerUpdateViewModel : ObservableObject, IQueryAttributa
 
         if (query.TryGetValue("customerId", out var idValue) && int.TryParse(idValue.ToString(), out int customerId))
         {
+            if (Customer == null)
+            {
+                Customer = new CustomerEntity();
+            }
             Customer.Id = customerId;
             await LoadCustomerDetails();
         }
@@ -68,7 +83,6 @@ public partial class CustomerUpdateViewModel : ObservableObject, IQueryAttributa
         if (customer != null)
         {
             CustomerName = customer.CustomerName;
-            
         }
         else
         {
@@ -97,5 +111,4 @@ public partial class CustomerUpdateViewModel : ObservableObject, IQueryAttributa
     {
         await Shell.Current.GoToAsync("//MainPage");
     }
-
 }

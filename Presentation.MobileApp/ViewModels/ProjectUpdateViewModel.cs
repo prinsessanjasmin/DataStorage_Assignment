@@ -5,6 +5,7 @@ using CommunityToolkit.Mvvm.Input;
 using Data.Entities;
 using System.Collections.ObjectModel;
 using System.Data;
+using System.Diagnostics;
 
 namespace Presentation.MobileApp.ViewModels;
 
@@ -88,7 +89,7 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
         _timeframeApiService = timeframeApiService;
         _projectStatusApiService = projectStatusApiService;
         _projectListViewModel = projectListViewModel;
-        _project = new ProjectEntity();
+        Project = new ProjectEntity();
 
         _companyServices = new ObservableCollection<CompanyServiceEntity>();
         _employees = new ObservableCollection<EmployeeEntity>();
@@ -100,32 +101,50 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
     [RelayCommand]
     public async Task SaveChanges()
     {
-        Project.Title = Title;
-        Project.About = About;
-        Project.Quantity = Quantity;
-        Project.TotalPrice = Project.TotalPrice;
-        
-        if (Project.Timeframe == null)
+
+        if (Project == null || Project.Id == 0) 
         {
-            Project.Timeframe = new TimeframeEntity();
+            ErrorMessage = "Invalid project ID. Cannot update.";
+            return;
         }
 
-        Project.Timeframe.StartDate = SelectedStartDate;
-        Project.Timeframe.EndDate = SelectedEndDate;
-        
-        Project.ProjectStatusId = SelectedProjectStatus.Id;
-        Project.ProjectStatus = SelectedProjectStatus;
+        var updatedProject = new ProjectEntity
+        {
+            Id = Project.Id,
+            Title = Title,
+            About = About,
+            Quantity = Quantity,
+            TotalPrice = Project.TotalPrice,
 
-        Project.CustomerId = SelectedCustomer.Id;
-        Project.Customer = SelectedCustomer;
+            TimeframeId = Project.TimeframeId,
+            Timeframe = new TimeframeEntity
+            {
+                Id = Project.TimeframeId,  // Keep the same timeframe ID
+                StartDate = SelectedStartDate,
+                EndDate = SelectedEndDate
+            },
 
-        Project.ProjectManagerId = SelectedEmployee.Id;
-        Project.ProjectManager = SelectedEmployee;
+            // Status
+            ProjectStatusId = SelectedProjectStatus.Id,
+            ProjectStatus = SelectedProjectStatus,
 
-        Project.CompanyServiceId = SelectedCompanyService.Id;
-        Project.CompanyService = SelectedCompanyService;
+            // Customer
+            CustomerId = SelectedCustomer.Id,
+            Customer = SelectedCustomer,
 
-        var finishedProject = await _projectApiService.UpdateProject(Project.Id, Project);
+            // Project Manager
+            ProjectManagerId = SelectedEmployee.Id,
+            ProjectManager = SelectedEmployee,
+
+            // Company Service
+            CompanyServiceId = SelectedCompanyService.Id,
+            CompanyService = SelectedCompanyService
+        };
+
+
+        Debug.WriteLine($"Updating Project with ID: {Project.Id}"); 
+
+        var finishedProject = await _projectApiService.UpdateProject(Project.Id, updatedProject);
         if (finishedProject != null)
         {
             await Shell.Current.GoToAsync("ProjectListPage");
@@ -143,6 +162,10 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
 
         if (query.TryGetValue("projectId", out var idValue) && int.TryParse(idValue.ToString(), out int projectId))
         {
+            if (Project == null)  
+            {
+                Project = new ProjectEntity();
+            }
             Project.Id = projectId;
             await LoadProjectDetails();
         }
@@ -153,6 +176,8 @@ public partial class ProjectUpdateViewModel : ObservableObject, IQueryAttributab
         var project = await _projectApiService.GetProjectById(Project.Id);
         if (project != null)
         {
+            Project = project;
+            Project.Id = project.Id;
             Title = project.Title;
             About = project.About;
             Quantity = project.Quantity;

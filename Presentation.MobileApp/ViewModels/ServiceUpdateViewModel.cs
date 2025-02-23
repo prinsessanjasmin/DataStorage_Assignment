@@ -57,39 +57,54 @@ public partial class ServiceUpdateViewModel : ObservableObject, IQueryAttributab
 
         _units = new ObservableCollection<UnitEntity>();
         _currencies = new ObservableCollection<CurrencyEntity>();
-        _companyService = new CompanyServiceEntity();
+        CompanyService = new CompanyServiceEntity();
     }
 
     [RelayCommand]
     public async Task SaveChanges()
     {
-        CompanyService.Title = Title;
-        CompanyService.Price = Price;
+        if (CompanyService == null || CompanyService.Id == 0)
+        {
+            ErrorMessage = "Invalid service ID. Cannot update.";
+            return;
+        }
 
-        CompanyService.UnitId = SelectedUnit.Id;
-        CompanyService.Unit = SelectedUnit;
+        var updatedCompanyService = new CompanyServiceEntity
+        {
+            Id = CompanyService.Id,  // Keep the same ID
+            Title = Title,
+            Price = Price,
+            Unit = SelectedUnit,
+            UnitId = SelectedUnit.Id,
+            Currency = SelectedCurrency,
+            CurrencyId = SelectedCurrency.Id
+        };
 
-        CompanyService.CurrencyId = SelectedCurrency.Id;
-        CompanyService.Currency = SelectedCurrency;
-
-        var finishedCompanyService = await _companyServiceApiService.UpdateCompanyService(CompanyService.Id, CompanyService);
+        var finishedCompanyService = await _companyServiceApiService.UpdateCompanyService(CompanyService.Id, updatedCompanyService);
         if (finishedCompanyService != null)
         {
-            await Shell.Current.GoToAsync("CompanyServiceListPage");
-            ErrorMessage = "Service updated successfully!";
+            ErrorMessage = string.Empty;
+            await Shell.Current.GoToAsync("ServiceListPage");
+            
         }
         else
         {
-            ErrorMessage = _companyServiceApiService.ErrorMessage;
+            ErrorMessage = _companyServiceApiService.ErrorMessage ?? "Unknown error occurred";
         }
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+
         //Method constructed by ChatGPT 4o
 
         if (query.TryGetValue("companyServiceId", out var idValue) && int.TryParse(idValue.ToString(), out int companyServiceId))
         {
+            if (CompanyService == null)
+            {
+                CompanyService = new CompanyServiceEntity();
+            }
+
             CompanyService.Id = companyServiceId;
             await LoadCompanyServiceDetails();
         }
@@ -100,6 +115,7 @@ public partial class ServiceUpdateViewModel : ObservableObject, IQueryAttributab
         var companyService = await _companyServiceApiService.GetCompanyServiceById(CompanyService.Id);
         if (companyService != null)
         {
+            CompanyService = companyService;
             Title = companyService.Title;
             Price = companyService.Price;
             

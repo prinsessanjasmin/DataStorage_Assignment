@@ -14,7 +14,7 @@ public class TimeframeApiService(HttpClient httpClient) : ITimeframeService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/timeframe", timeframe);
+            var response = await _httpClient.PostAsJsonAsync("api/Timeframe", timeframe);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -35,7 +35,7 @@ public class TimeframeApiService(HttpClient httpClient) : ITimeframeService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/timeframe");
+            var response = await _httpClient.GetAsync("api/Timeframe");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -55,7 +55,7 @@ public class TimeframeApiService(HttpClient httpClient) : ITimeframeService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/timeframe/{id}");
+            var response = await _httpClient.GetAsync($"api/Timeframe/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -79,7 +79,7 @@ public class TimeframeApiService(HttpClient httpClient) : ITimeframeService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/timeframe/{id}", timeframe);
+            var response = await _httpClient.PutAsJsonAsync($"api/Timeframe/{id}", timeframe);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -103,7 +103,7 @@ public class TimeframeApiService(HttpClient httpClient) : ITimeframeService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/timeframe/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Timeframe/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

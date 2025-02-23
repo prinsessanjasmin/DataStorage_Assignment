@@ -13,7 +13,7 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/companyService", companyService);
+            var response = await _httpClient.PostAsJsonAsync("api/CompanyService", companyService);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -33,7 +33,7 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/companyService");
+            var response = await _httpClient.GetAsync("api/CompanyService");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -53,7 +53,7 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/companyService/{id}");
+            var response = await _httpClient.GetAsync($"api/CompanyService/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -77,18 +77,17 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/customerService/{id}", updatedCompanyService);
+            var response = await _httpClient.PutAsJsonAsync($"api/CompanyService/{id}", updatedCompanyService);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
                 return await response.Content.ReadFromJsonAsync<CompanyServiceEntity>();
             }
-            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
-            {
-                ErrorMessage = "Failed to update service";
-                return null!;
-            }
-            return null!;
+            
+            ErrorMessage = response.StatusCode == System.Net.HttpStatusCode.NotFound
+             ? "Service not found"
+            : "Failed to update service";
+            return null;
         }
         catch (HttpRequestException ex)
         {
@@ -101,7 +100,7 @@ public class CompanyServiceApiService(HttpClient httpClient) : ICompanyServiceSe
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/companyService/{id}");
+            var response = await _httpClient.DeleteAsync($"api/CompanyService/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

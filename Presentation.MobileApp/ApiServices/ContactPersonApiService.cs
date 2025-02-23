@@ -14,7 +14,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/contactPerson", contact);
+            var response = await _httpClient.PostAsJsonAsync("api/ContactPerson", contact);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -35,7 +35,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/contactperson");
+            var response = await _httpClient.GetAsync("api/ContactPerson");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -55,7 +55,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/contactperson/{email}");
+            var response = await _httpClient.GetAsync($"api/ContactPerson/{email}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -79,7 +79,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/contactperson/{id}");
+            var response = await _httpClient.GetAsync($"api/ContactPerson/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -103,7 +103,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/contactperson/{id}", updatedContact);
+            var response = await _httpClient.PutAsJsonAsync($"api/ContactPerson/{id}", updatedContact);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -127,7 +127,7 @@ public class ContactPersonApiService(HttpClient httpClient) : IContactPersonServ
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/contactperson/{id}");
+            var response = await _httpClient.DeleteAsync($"api/ContactPerson/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

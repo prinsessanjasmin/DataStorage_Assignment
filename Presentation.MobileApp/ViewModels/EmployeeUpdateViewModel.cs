@@ -48,20 +48,30 @@ public partial class EmployeeUpdateViewModel : ObservableObject, IQueryAttributa
         _companyRoleApiService = companyRoleApiService;
         _employeeListViewModel = employeeListViewModel;
         _roles = new ObservableCollection<CompanyRoleEntity>();
-        _employee = new EmployeeEntity();
+        Employee = new EmployeeEntity();
     }
 
     [RelayCommand]
     public async Task SaveChanges()
     {
-        Employee.FirstName = FirstName;
-        Employee.LastName = LastName;
-        Employee.Email = Email;
-        Employee.PhoneNumber = PhoneNumber;
-        Employee.CompanyRoleId = SelectedRole.Id;
-        Employee.CompanyRole = SelectedRole;
+        if (Employee == null || Employee.Id == 0)
+        {
+            ErrorMessage = "Invalid employee ID. Cannot update.";
+            return;
+        }
+
+        var updatedEmployee = new EmployeeEntity
+        {
+            Id = Employee.Id,
+            FirstName = FirstName,
+            LastName = LastName,
+            Email = Email,
+            PhoneNumber = PhoneNumber,
+            CompanyRoleId = SelectedRole.Id,
+            CompanyRole = SelectedRole
+        };
        
-        var finishedEmployee = await _employeeApiService.UpdateEmployee(Employee.Id, Employee);
+        var finishedEmployee = await _employeeApiService.UpdateEmployee(Employee.Id, updatedEmployee);
         if (finishedEmployee != null)
         {
             await Shell.Current.GoToAsync("EmployeeListPage");
@@ -79,6 +89,10 @@ public partial class EmployeeUpdateViewModel : ObservableObject, IQueryAttributa
 
         if (query.TryGetValue("employeeId", out var idValue) && int.TryParse(idValue.ToString(), out int employeeId))
         {
+            if (Employee == null)
+            {
+                Employee = new EmployeeEntity();
+            }
             Employee.Id = employeeId;
             await LoadEmployeeDetails();
         }
@@ -89,6 +103,7 @@ public partial class EmployeeUpdateViewModel : ObservableObject, IQueryAttributa
         var employee = await _employeeApiService.GetEmployeeById(Employee.Id);
         if (employee != null)
         {
+            Employee = employee;
             FirstName = employee.FirstName;
             LastName = employee.LastName;
             Email = employee.Email;

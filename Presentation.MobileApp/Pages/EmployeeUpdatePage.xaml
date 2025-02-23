@@ -38,6 +38,7 @@
         </Grid>
         <VerticalStackLayout Grid.Row="2" Margin="20">
             <Button x:Name="Btn_SaveChanges" Text="Update Employee" Command="{Binding SaveChangesCommand}" Margin="10"/>
+            <Button x:Name="Btn_Delete" BackgroundColor="Red" Text="Delete Employee" Command="{Binding DeleteEmployeeCommand}" CommandParameter="{Binding Employee.Id}" Margin="10"/>
             <Button x:Name="Btn_GoToEmployeeList" Text="All Employees" Command="{Binding NavigateToEmployeeListCommand}"  Margin="10"/>
             <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="10"/>
         </VerticalStackLayout>

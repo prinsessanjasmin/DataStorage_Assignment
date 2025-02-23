@@ -7,10 +7,57 @@
              x:DataType="{x:Type viewmodels:ProjectUpdateViewModel}"
              
              Title="Update Project">
-    <VerticalStackLayout>
-        <Label 
-            Text="Welcome to .NET MAUI!"
-            VerticalOptions="Center" 
-            HorizontalOptions="Center" />
-    </VerticalStackLayout>
+
+    <ScrollView>
+        <Grid RowDefinitions="auto, *, auto, auto" Padding="10">
+            <VerticalStackLayout Grid.Row="0">
+                <Label Text="Update Project" VerticalOptions="Center" HorizontalOptions="Center" />
+            </VerticalStackLayout>
+            <Grid Grid.Row="1" RowDefinitions="1*, 4*, 1*, 1*, 1*, 1*, 1*, 1*" Margin="10">
+                <StackLayout Grid.Row="0" Margin="5">
+                    <Label Text="Title:" Margin="0, 0, 0, 5"/>
+                    <Entry x:Name="Entry_Title" Text="{Binding Title, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="1" Margin="5">
+                    <Label Text="About:" Margin="0, 0, 0, 5"/>
+                    <Editor x:Name="Entry_About" Text="{Binding About, Mode=TwoWay}" Placeholder="Describe the project..." HeightRequest="80"/>
+                </StackLayout>
+                <HorizontalStackLayout Grid.Row="2" Padding="5">
+                    <StackLayout Margin="0, 0, 5, 0">
+                        <Label Text="Start date:" Padding="0, 0, 0, 5"/>
+                        <DatePicker x:Name="DatePicker_StartDate" Date="{Binding SelectedStartDate, Mode=TwoWay}" />
+                    </StackLayout>
+                    <StackLayout Margin="5, 0, 5, 0">
+                        <Label Text="End date:" Padding="0, 0, 0, 5"/>
+                        <DatePicker x:Name="DatePicker_EndDate" Date="{Binding SelectedEndDate, Mode=TwoWay}"/>
+                    </StackLayout>
+                </HorizontalStackLayout>
+                <StackLayout Grid.Row="3" Margin="5">
+                    <Picker x:Name="Picker_CompanyService" Title="Select Service" ItemsSource="{Binding CompanyServices}" ItemDisplayBinding="{Binding Title}" SelectedItem="{Binding SelectedCompanyService, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="4" Margin="5">
+                    <Picker x:Name="Picker_Customer" Title="Select Customer" ItemsSource="{Binding Customers}" ItemDisplayBinding="{Binding CustomerName}" SelectedItem="{Binding SelectedCustomer, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="5" Margin="5">
+                    <Picker x:Name="Picker_ProjectManager" Title="Select Project Manager" ItemsSource="{Binding Employees}" ItemDisplayBinding="{Binding LastName}" SelectedItem="{Binding SelectedEmployee, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="6" Margin="5">
+                    <Picker x:Name="Picker_ProjectStatus" Title="Select Project Status" ItemsSource="{Binding ProjectStatuses}" ItemDisplayBinding="{Binding StatusName}" SelectedItem="{Binding SelectedProjectStatus, Mode=TwoWay}"/>
+                </StackLayout>
+                <StackLayout Grid.Row="7" Margin="5">
+                    <Label Text="Number of spent units (hours, days, services):" Margin="5"/>
+                    <Entry x:Name="Entry_Quantity" Text="{Binding Quantity, Mode=TwoWay}"/>
+                </StackLayout>
+            </Grid>
+            <StackLayout Grid.Row="2" Margin="10" Padding="5">
+                <Label Text="{Binding ErrorMessage}" IsVisible="{Binding ErrorMessage, Converter={StaticResource StringNotNullOrEmptyBoolConverter}}" TextColor="Red" Padding="0, 0, 0, 5"/>
+            </StackLayout>
+            <VerticalStackLayout Grid.Row="3" Margin="10">
+                <Button x:Name="Btn_SaveChanges" Text="Update Project" Command="{Binding SaveChangesCommand}" Margin="0, 5"/>
+                <Button x:Name="Btn_Delete" BackgroundColor="Red" Text="Delete Project" Command="{Binding DeleteProjectCommand}" CommandParameter="{Binding Project.Id}" Margin="0, 5"/>
+                <Button x:Name="Btn_ProjectList" Text="All Projects" Command="{Binding NavigateToProjectListCommand}"  Margin="0, 5"/>
+                <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="0, 5"/>
+            </VerticalStackLayout>
+        </Grid>
+    </ScrollView>
 </ContentPage>

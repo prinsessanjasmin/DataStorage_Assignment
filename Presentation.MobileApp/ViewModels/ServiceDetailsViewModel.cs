@@ -12,7 +12,7 @@ public partial class ServiceDetailsViewModel : ObservableObject, IQueryAttributa
     private readonly ServiceListViewModel _serviceListViewModel;
 
     [ObservableProperty]
-    private CompanyServiceEntity _service;
+    private CompanyServiceEntity _companyService;
 
     [ObservableProperty]
     private string? _errorMessage;
@@ -21,21 +21,41 @@ public partial class ServiceDetailsViewModel : ObservableObject, IQueryAttributa
     {
         _companyServiceApiService = companyServiceApiService;
         _serviceListViewModel = serviceListViewModel;        
+        CompanyService = new CompanyServiceEntity();
     }
 
     public async void ApplyQueryAttributes(IDictionary<string, object> query)
     {
+        Console.WriteLine("ApplyQueryAttributes called!");
+        Console.WriteLine("Received query parameters:");
+        foreach (var key in query.Keys)
+        {
+            Console.WriteLine($"KEYS {key}: {query[key]}");
+        }
+
         //Method constructed by ChatGPT 4o
         if (query.TryGetValue("serviceId", out var idValue) && int.TryParse(idValue.ToString(), out int serviceId))
         {
-            Service = await _companyServiceApiService.GetCompanyServiceById(serviceId);
+            CompanyService = await _companyServiceApiService.GetCompanyServiceById(serviceId);
         }
     }
 
     [RelayCommand]
     public async Task NavigateToServiceUpdate(int id)
     {
-        await Shell.Current.GoToAsync($"ServiceUpdatePage?serviceId={id}");
+        if (CompanyService != null)
+        {
+            Console.WriteLine($"Navigating to ServiceUpdatePage with ID: {CompanyService.Id}");
+            await Shell.Current.GoToAsync("ServiceUpdatePage", new Dictionary<string, object>
+            {
+                { "companyServiceId", CompanyService.Id }
+            });
+        }
+        else
+        {
+            ErrorMessage = "Error: No service selected.";
+            Console.WriteLine("Error: No service selected.");
+        }
     }
 
     [RelayCommand]

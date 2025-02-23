@@ -16,7 +16,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/projectStatus", projectStatus);
+            var response = await _httpClient.PostAsJsonAsync("api/ProjectStatus", projectStatus);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -38,7 +38,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/projectStatus");
+            var response = await _httpClient.GetAsync("api/ProjectStatus");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -58,7 +58,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/projectStatus/{id}");
+            var response = await _httpClient.GetAsync($"api/ProjectStatus/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -82,7 +82,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/projectStatus/{name}");
+            var response = await _httpClient.GetAsync($"api/ProjectStatus/{name}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -106,7 +106,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/projectStatus/{id}", updatedProjectStatus);
+            var response = await _httpClient.PutAsJsonAsync($"api/ProjectStatus/{id}", updatedProjectStatus);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -130,7 +130,7 @@ public class ProjectStatusApiService(HttpClient httpClient) : IProjectStatusServ
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/projectStatus/{id}");
+            var response = await _httpClient.DeleteAsync($"api/ProjectStatus/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

@@ -14,7 +14,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/currency", currency);
+            var response = await _httpClient.PostAsJsonAsync("api/Currency", currency);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -34,7 +34,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/currency");
+            var response = await _httpClient.GetAsync("api/Currency");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -54,7 +54,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/currency/{currencyName}");
+            var response = await _httpClient.GetAsync($"api/Currency/{currencyName}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -78,7 +78,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/currency/{id}");
+            var response = await _httpClient.GetAsync($"api/Currency/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -103,7 +103,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
 
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/currency/{id}", updatedCurrency);
+            var response = await _httpClient.PutAsJsonAsync($"api/Currency/{id}", updatedCurrency);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -127,7 +127,7 @@ public class CurrencyApiService(HttpClient httpClient) : ICurrencyService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/currency/{id}");
+            var response = await _httpClient.DeleteAsync($"api/Currency/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

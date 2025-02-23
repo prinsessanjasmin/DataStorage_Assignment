@@ -15,7 +15,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.PostAsJsonAsync("api/companyrole", role);
+            var response = await _httpClient.PostAsJsonAsync("api/CompanyRole", role);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -35,7 +35,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.GetAsync("api/companyrole");
+            var response = await _httpClient.GetAsync("api/CompanyRole");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -55,7 +55,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/companyrole/{id}");
+            var response = await _httpClient.GetAsync($"api/CompanyRole/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -79,7 +79,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.GetAsync($"api/companyrole/{roleName}");
+            var response = await _httpClient.GetAsync($"api/CompanyRole/{roleName}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -103,7 +103,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.PutAsJsonAsync($"api/companyrole/{id}", updatedCompanyRole);
+            var response = await _httpClient.PutAsJsonAsync($"api/CompanyRole/{id}", updatedCompanyRole);
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;
@@ -127,7 +127,7 @@ public class CompanyRoleApiService(HttpClient httpClient) : ICompanyRoleService
     {
         try
         {
-            var response = await _httpClient.DeleteAsync($"api/companyrole/{id}");
+            var response = await _httpClient.DeleteAsync($"api/CompanyRole/{id}");
             if (response.IsSuccessStatusCode)
             {
                 ErrorMessage = null!;

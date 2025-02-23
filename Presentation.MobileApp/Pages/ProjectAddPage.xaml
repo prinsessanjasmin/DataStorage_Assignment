@@ -55,6 +55,7 @@
             </StackLayout>
             <VerticalStackLayout Grid.Row="3" Margin="10">
                 <Button x:Name="Btn_SaveChanges" Text="Add Project" Command="{Binding SaveChangesCommand}" Margin="0, 5"/>
+                
                 <Button x:Name="Btn_ProjectList" Text="All Projects" Command="{Binding NavigateToProjectListCommand}"  Margin="0, 5"/>
                 <Button x:Name="Btn_GoToMainMenu" Text="Main Menu" Command="{Binding NavigateToHomeCommand }"  Margin="0, 5"/>
             </VerticalStackLayout>
